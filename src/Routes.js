@@ -3,6 +3,7 @@ import { StackNavigator } from 'react-navigation'
 
 import TabNav from './TabNav'
 import DetailsScreen from './components/pages/DetailsScreen'
+import { mainColor } from './colors/colors'
 
 const Routes = StackNavigator(
     {
@@ -18,9 +19,9 @@ const Routes = StackNavigator(
     },
     {
         navigationOptions: {
-            headerTintColor: '#fff',
+            headerTintColor: 'white',
             headerStyle: {
-                backgroundColor: '#2196F3',
+                backgroundColor: mainColor,
            }
         }
     }
