@@ -12,12 +12,12 @@ import {
   View
 } from 'react-native';
 
-import RootTabs from './RootTabs'
+import Routes from './Routes'
 
 export default class App extends Component {
   render() {
     return (
-      <RootTabs />
+      <Routes/>
     );
   }
 }
