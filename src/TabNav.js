@@ -1,19 +1,68 @@
 import React from 'react'
-import { TabNavigator, TabBarBottom } from 'react-navigation';
 import Entypo from 'react-native-vector-icons/Entypo'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import {
+    TabNavigator,
+    TabBarBottom,
+    StackNavigator
+} from 'react-navigation';
 
+
+import { mainColor } from './colors'
 import MaterialsScreen from './components/pages/MaterialsScreen'
 import MyAccountScreen from './components/pages/MyAccountScreen'
 import AnnounceScreen from './components/pages/AnnounceScreen'
+import DetailsScreen from './components/pages/DetailsScreen'
+
+const navOptions = {
+    headerTintColor: 'white',
+    headerStyle: {
+        backgroundColor: mainColor,
+    }
+}
+
+const MaterialNav = StackNavigator(
+    {
+        Material: {
+            screen: MaterialsScreen
+        },
+        Details: {
+            screen: DetailsScreen
+        }
+    },
+    {
+        navigationOptions: navOptions
+    }
+)
+
+const AnnounceNav = StackNavigator(
+    {
+        Announce: {
+            screen: AnnounceScreen
+        }
+    },
+    {
+        navigationOptions: navOptions
+    }
+)
+
+const MyAccountNav = StackNavigator(
+    {
+        MyAccount: {
+            screen: MyAccountScreen
+        }
+    },
+    {
+        navigationOptions: navOptions
+    }
+)
 
 const TabNav = TabNavigator(
     {
         Material: {
-            screen: MaterialsScreen,
+            screen: MaterialNav,
             navigationOptions: {
-                title: 'Materiais',
                 tabBarLabel: 'Materiais',
                 tabBarIcon: ({ tintColor, focused }) => (
                     <Entypo
@@ -25,9 +74,8 @@ const TabNav = TabNavigator(
             },
         },
         Announce: {
-            screen: AnnounceScreen,
+            screen: AnnounceNav,
             navigationOptions: {
-                title: 'Anunciar',
                 tabBarLabel: 'Anunciar',
                 tabBarIcon: ({ tintColor, focused }) => (
                     <Ionicons
@@ -39,9 +87,8 @@ const TabNav = TabNavigator(
             }
         },
         MyAccount: {
-            screen: MyAccountScreen,
+            screen: MyAccountNav,
             navigationOptions: {
-                title: 'Minha conta',
                 tabBarLabel: 'Minha conta',
                 tabBarIcon: ({ tintColor, focused }) => (
                     <MaterialCommunityIcons
@@ -55,7 +102,7 @@ const TabNav = TabNavigator(
     },
     {
         tabBarOptions: {
-            activeTintColor: 'dodgerblue',
+            activeTintColor: mainColor,
         },
         tabBarComponent: TabBarBottom,
         tabBarPosition: 'bottom',

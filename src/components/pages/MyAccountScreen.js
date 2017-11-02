@@ -1,15 +1,27 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
-  Text,
-  View
+    StyleSheet,
+    Text,
+    View
 } from 'react-native';
 
-export default props => (
-    <View style={styles.container}>
-        <Text style={styles.welcome}>My Account</Text>
-    </View>
-)
+export default class MyAccountScreen extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    static navigationOptions = {
+        title: 'Minha Conta'
+    }
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.welcome}>My Account</Text>
+            </View>
+        )
+    }
+}
 
 const styles = StyleSheet.create({
     container: {
