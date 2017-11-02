@@ -16,10 +16,16 @@ import AnnounceScreen from './components/pages/AnnounceScreen'
 import DetailsScreen from './components/pages/DetailsScreen'
 
 const navOptions = {
-    headerTintColor: 'white',
     headerStyle: {
         backgroundColor: mainColor,
-    }
+    },
+    headerTitleStyle: {
+        color: 'white',
+    },
+    headerBackTitleStyle: {
+        color: 'white',
+    },
+    headerTintColor: 'white',
 }
 
 const MaterialNav = StackNavigator(
