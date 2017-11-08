@@ -6,6 +6,8 @@ import {
     TouchableWithoutFeedback,
     Image
 } from 'react-native'
+import Entypo from 'react-native-vector-icons/Entypo'
+import { mainColor } from '../colors'
 
 export default class Item extends Component {
     constructor(props) {
@@ -16,21 +18,29 @@ export default class Item extends Component {
 
     _onPress() {
         console.log(this.state.material.title)
-        this.props.navigation.navigate('Details', { material: this.state.material })
+        //this.props.navigation.navigate('Details', { material: this.state.material })
+
     }
 
     render() {
+        const { item, imageView, image, itemDetails, title, type, localView, local } = styles
         return (
             <TouchableWithoutFeedback onPress={this._onPress}>
-                <View style={styles.item}>
-                    <View style={styles.foto}>
-                        <Image style={{ height: 100, width: 100 }} source={{ uri: this.state.material.imageURL }} />
+                <View style={item}>
+                    <View style={imageView}>
+                        <Image style={image} source={{ uri: this.state.material.imageURL }} />
                     </View>
-                    <View style={styles.detalhesItens}>
-                        <Text style={styles.txtTitulo}>{this.state.material.title}</Text>
-                        <Text style={styles.txtValor}>{this.state.material.description}</Text>
-                        <Text style={styles.txtDetalhes}> Local: {this.state.material.local}</Text>
-                        <Text>Dt publicacao: {this.state.material.date}</Text>
+                    <View style={itemDetails}>
+                        <Text style={title}>{this.state.material.title}</Text>
+                        <Text style={type}>{this.state.material.type}</Text>
+                        <View style={localView}>
+                            <Entypo
+                                name='location-pin'
+                                size={18}
+                                style={{ color: mainColor }}
+                            />
+                            <Text style={local}>{this.state.material.local}</Text>
+                        </View>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
@@ -43,28 +53,41 @@ const styles = StyleSheet.create({
         borderWidth: 0.5,
         backgroundColor: '#FFF',
         borderColor: '#999',
-        margin: 10,
         padding: 10,
         flexDirection: 'row'
     },
-    foto: {
+    imageView: {
         height: 102,
         width: 102
     },
-    detalhesItens: {
+    image: {
+        height: 100,
+        borderRadius: 50,
+        width: 100
+    },
+    itemDetails: {
         marginLeft: 20,
+        marginTop: 10,
         flex: 1
     },
-    txtTitulo: {
+    title: {
         fontSize: 18,
         marginBottom: 5,
-        color: 'blue'
-    },
-    txtValor: {
-        fontSize: 16,
+        color: 'black',
         fontWeight: 'bold'
     },
-    txtDetalhes: {
-        fontSize: 16
+    local: {
+        fontSize: 15
+    },
+    type: {
+        fontSize: 15,
+        marginBottom: 5,
+        marginLeft: 4
+    },
+    localView: {
+        flex: 1,
+        flexDirection: 'row',
+        padding: 0,
+        marginTop: 0
     }
 })
