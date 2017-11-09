@@ -18,7 +18,7 @@ export default class Item extends Component {
 
     _onPress() {
         console.log(this.state.material.title)
-        //this.props.navigation.navigate('Details', { material: this.state.material })
+        this.props.navigation.navigate('Details', { material: this.state.material })
 
     }
 
@@ -27,9 +27,7 @@ export default class Item extends Component {
         return (
             <TouchableWithoutFeedback onPress={this._onPress}>
                 <View style={item}>
-                    <View style={imageView}>
-                        <Image style={image} source={{ uri: this.state.material.imageURL }} />
-                    </View>
+                    <Image style={image} source={{ uri: this.state.material.imageURL }} />
                     <View style={itemDetails}>
                         <Text style={title}>{this.state.material.title}</Text>
                         <Text style={type}>{this.state.material.type}</Text>
@@ -55,10 +53,6 @@ const styles = StyleSheet.create({
         borderColor: '#999',
         padding: 10,
         flexDirection: 'row'
-    },
-    imageView: {
-        height: 102,
-        width: 102
     },
     image: {
         height: 100,
