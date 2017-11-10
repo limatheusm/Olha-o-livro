@@ -14,7 +14,7 @@ export default props => (
         <Image
             resizeMode="contain"
             source={{ uri: props.imageURL }}
-            style={styles.image}
+            style={props.circle ? styles.imageCircle : styles.image}
         />
         <Text style={styles.title}>{props.title}</Text>
         <View style={styles.iconView}>
@@ -33,6 +33,18 @@ const styles = StyleSheet.create({
         //position: 'absolute',
         width: 220,
         height: 220,
+        shadowOffset: {
+            width: 0,
+            height: 3
+        },
+        shadowRadius: 5,
+        shadowOpacity: 1.0,
+    },
+    imageCircle: {
+        //position: 'absolute',
+        width: 180,
+        height: 180,
+        borderRadius: 90,
         shadowOffset: {
             width: 0,
             height: 3
