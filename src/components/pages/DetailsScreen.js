@@ -10,27 +10,36 @@ import {
 } from 'react-native';
 
 import ImageHeader from '../ImageHeader';
-import DetailsMaterial from '../DetailsMaterial';
+import MaterialDetails from '../MaterialDetails';
 
 export default class DetailsScreen extends Component {
     constructor(props) {
         super(props);
+        this.state = { material: this.props.navigation.state.params.material };
+        this.toDonatorDetailsScreen = this.toDonatorDetailsScreen.bind(this);
     }
 
     static navigationOptions = {
         title: 'Detalhes'
     }
 
+    toDonatorDetailsScreen() {
+        this.props.navigation.navigate('DonatorDetails', { donator: this.state.material.donator })
+    }
+
     render() {
-        const { params } = this.props.navigation.state;
         return (
             <View style={{ flex: 1 }}>
                 <ImageHeader
-                    imageURL={params.material.imageURL}
-                    title={params.material.title}
-                    local={params.material.local}
+                    imageURL={this.state.material.imageURL}
+                    title={this.state.material.title}
+                    local={this.state.material.local}
                 />
-                <DetailsMaterial material={params.material}/>
+                <MaterialDetails
+                    material={this.state.material}
+                    navigation={this.props.navigation}
+                    toDonatorDetailsScreen={this.toDonatorDetailsScreen}
+                />
             </View>
         )
     }

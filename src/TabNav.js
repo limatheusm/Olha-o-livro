@@ -1,7 +1,7 @@
-import React from 'react'
-import Entypo from 'react-native-vector-icons/Entypo'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import React from 'react';
+import Entypo from 'react-native-vector-icons/Entypo';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
     TabNavigator,
     TabBarBottom,
@@ -9,11 +9,12 @@ import {
 } from 'react-navigation';
 
 
-import { mainColor } from './colors'
-import MaterialsScreen from './components/pages/MaterialsScreen'
-import MyAccountScreen from './components/pages/MyAccountScreen'
-import AnnounceScreen from './components/pages/AnnounceScreen'
-import DetailsScreen from './components/pages/DetailsScreen'
+import { mainColor } from './colors';
+import MaterialsScreen from './components/pages/MaterialsScreen';
+import MyAccountScreen from './components/pages/MyAccountScreen';
+import AnnounceScreen from './components/pages/AnnounceScreen';
+import DetailsScreen from './components/pages/DetailsScreen';
+import DonatorDetailsScreen from './components/pages/DonatorDetailsScreen';
 
 const navOptions = {
     headerStyle: {
@@ -35,6 +36,9 @@ const MaterialNav = StackNavigator(
         },
         Details: {
             screen: DetailsScreen
+        },
+        DonatorDetails: {
+            screen: DonatorDetailsScreen
         }
     },
     {
