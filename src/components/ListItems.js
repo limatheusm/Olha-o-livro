@@ -21,6 +21,10 @@ export default class ListItems extends Component {
     items.push(new Material(1))
     items.push(new Material(2))
     items.push(new Material(3))
+    items.push(new Material(4))
+    items.push(new Material(5))
+    items.push(new Material(6))
+    items.push(new Material(7))
     this.setState({ ...this.state, items })
   }
 

@@ -16,6 +16,7 @@ import AnnounceScreen from './components/pages/AnnounceScreen';
 import DetailsScreen from './components/pages/DetailsScreen';
 import DonatorDetailsScreen from './components/pages/DonatorDetailsScreen';
 
+//Controle das cores de navegação.
 const navOptions = {
     headerStyle: {
         backgroundColor: mainColor,
@@ -29,6 +30,7 @@ const navOptions = {
     headerTintColor: 'white',
 }
 
+//Controle de navegação da aba MATERIAL.
 const MaterialNav = StackNavigator(
     {
         Material: {
@@ -46,6 +48,7 @@ const MaterialNav = StackNavigator(
     }
 )
 
+//Controle de navegação da aba ANUNCIAR.
 const AnnounceNav = StackNavigator(
     {
         Announce: {
@@ -57,6 +60,7 @@ const AnnounceNav = StackNavigator(
     }
 )
 
+//Controle de navegação da aba MINHA CONTA.
 const MyAccountNav = StackNavigator(
     {
         MyAccount: {
@@ -68,6 +72,8 @@ const MyAccountNav = StackNavigator(
     }
 )
 
+
+//Componente principal que é exportado pro Index, controla a barra de navevegação inferior.
 const TabNav = TabNavigator(
     {
         Material: {
@@ -75,7 +81,7 @@ const TabNav = TabNavigator(
             navigationOptions: {
                 tabBarLabel: 'Materiais',
                 tabBarIcon: ({ tintColor, focused }) => (
-                    <Entypo
+                    <Entypo //Componente do icone da barra de navegação inferior
                         name={focused ? 'open-book' : 'book'}
                         size={26}
                         style={{ color: tintColor }}
@@ -88,7 +94,7 @@ const TabNav = TabNavigator(
             navigationOptions: {
                 tabBarLabel: 'Anunciar',
                 tabBarIcon: ({ tintColor, focused }) => (
-                    <Ionicons
+                    <Ionicons //Componente do icone da barra de navegação inferior
                         name={focused ? 'ios-megaphone' : 'ios-megaphone-outline'}
                         size={26}
                         style={{ color: tintColor }}
@@ -101,7 +107,7 @@ const TabNav = TabNavigator(
             navigationOptions: {
                 tabBarLabel: 'Minha conta',
                 tabBarIcon: ({ tintColor, focused }) => (
-                    <MaterialCommunityIcons
+                    <MaterialCommunityIcons //Componente do icone da barra de navegação inferior
                         name={focused ? 'account' : 'account-outline'}
                         size={26}
                         style={{ color: tintColor }}

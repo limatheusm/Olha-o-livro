@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         //position: 'absolute',
         width: 180,
         height: 180,
-        borderRadius: 90,
+        borderRadius: 180,
         shadowOffset: {
             width: 0,
             height: 3
