@@ -3,7 +3,8 @@ import {
     View,
     Image,
     Text,
-    StyleSheet
+    StyleSheet,
+    Platform
 } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
         //position: 'absolute',
         width: 180,
         height: 180,
-        borderRadius: 180,
+        borderRadius:  Platform.OS === 'ios' ? 90 : 180,
         shadowOffset: {
             width: 0,
             height: 3
