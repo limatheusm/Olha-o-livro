@@ -6,7 +6,8 @@ import {
     Image,
     StyleSheet,
     Button,
-    Dimensions
+    Dimensions,
+    Alert
 } from 'react-native';
 
 import ImageHeader from '../ImageHeader';
@@ -17,6 +18,7 @@ export default class DetailsScreen extends Component {
         super(props);
         this.state = { material: this.props.navigation.state.params.material };
         this.toDonatorDetailsScreen = this.toDonatorDetailsScreen.bind(this);
+        this.heartAction = this.heartAction.bind(this);
     }
 
     static navigationOptions = {
@@ -25,6 +27,10 @@ export default class DetailsScreen extends Component {
 
     toDonatorDetailsScreen() {
         this.props.navigation.navigate('DonatorDetails', { donator: this.state.material.donator })
+    }
+
+    heartAction() {
+        Alert.alert("Voce deu like no material "+ this.state.material.title +"!");
     }
 
     render() {
@@ -39,6 +45,7 @@ export default class DetailsScreen extends Component {
                     material={this.state.material}
                     navigation={this.props.navigation}
                     toDonatorDetailsScreen={this.toDonatorDetailsScreen}
+                    heartAction={this.heartAction}
                 />
             </View>
         )

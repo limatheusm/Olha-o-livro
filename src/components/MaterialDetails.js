@@ -19,7 +19,7 @@ export default props => (
     <ScrollView style={styles.detailsView}>
         <View style={styles.iconViewHeader}>
             <Text style={styles.type}>Tipo: {props.material.type}</Text>
-            <TouchableHighlight onPress={() => false} underlayColor="white">
+            <TouchableHighlight onPress={props.heartAction} underlayColor="white">
                 <View>
                     <IconText
                         font="Entypo"
