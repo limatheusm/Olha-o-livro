@@ -1,0 +1,22 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/loader.js",
+  "scripts": {
+    "dev": "node src/infra/loader.js",
+    "production": "pm2 start /src/infra/loader.js --name olha-o-livro"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "node-restful": "^0.2.6",
+    "pm2": "^2.8.0"
+  },
+  "dependencies": {
+    "mongoose": "^4.10.8"
+  }
+}
