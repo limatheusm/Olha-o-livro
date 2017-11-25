@@ -18,7 +18,11 @@ import IconText from './IconText';
 export default props => (
     <ScrollView style={styles.detailsView}>
         <View style={styles.iconViewHeader}>
-            <Text style={styles.type}>Tipo: {props.material.type}</Text>
+            <View style={styles.materialDetails}>
+                <Text style={styles.typeDetails}>{props.material.sharingType}</Text>
+                <Text style={styles.typeDetails}>Tipo: {props.material.type}</Text>
+                <Text style={styles.sharingType}>Categoria: {props.material.category}</Text>
+            </View>
             <TouchableHighlight onPress={props.heartAction} underlayColor="white">
                 <View>
                     <IconText
@@ -74,7 +78,7 @@ const styles = StyleSheet.create({
         padding: 20,
         backgroundColor: 'white'
     },
-    type: {
+    sharingType: {
         fontSize: 15,
         fontStyle: 'italic',
         marginBottom: 20,
@@ -92,5 +96,14 @@ const styles = StyleSheet.create({
     button: {
         marginTop: 5,
         marginBottom: 30
+    },
+    materialDetails: {
+        flexDirection: 'column',
+    },
+    typeDetails: {
+        fontSize: 15,
+        fontStyle: 'italic',
+        marginBottom: 5,
+        color: "gray"
     }
 })

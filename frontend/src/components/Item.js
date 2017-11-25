@@ -23,14 +23,14 @@ export default class Item extends Component {
     }
 
     render() {
-        const { item, imageView, image, itemDetails, title, type, localView, local } = styles
+        const { item, imageView, image, itemDetails, title, sharingType, localView, local } = styles
         return (
             <TouchableWithoutFeedback onPress={this._onPress}>
                 <View style={item}>
                     <Image style={image} source={{ uri: this.state.material.imageURL }} />
                     <View style={itemDetails}>
                         <Text style={title}>{this.state.material.title}</Text>
-                        <Text style={type}>{this.state.material.type}</Text>
+                        <Text style={sharingType}>{this.state.material.sharingType}</Text>
                         <View style={localView}>
                             <Entypo
                                 name='location-pin'
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     local: {
         fontSize: 15
     },
-    type: {
+    sharingType: {
         fontSize: 15,
         marginBottom: 5,
         marginLeft: 4
