@@ -1,4 +1,4 @@
-class Donator {
+class UserDonator {
     constructor() {
         this.name = "Donator 1";
         this.mail = "donator@olhaolivro.com";
@@ -9,4 +9,4 @@ class Donator {
     }
 }
 
-export { Donator }
+export { UserDonator }
