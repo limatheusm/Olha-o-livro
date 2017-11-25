@@ -6,7 +6,8 @@ import {
 
 import { Picker, Item, Button, Label, Input, Container, Content, Form } from 'native-base';
 
-import { Material, Donator } from '../model';
+import { Material } from '../../business/model/material';
+import { UserDonator } from '../../business/model/user';
 
 export default class AnnounceScreen extends Component {
   constructor(props) {
@@ -47,7 +48,7 @@ export default class AnnounceScreen extends Component {
     material.imageURL = this.state.imgURL;
     material.local = this.state.local;
     material.date = "10/10/2017";
-    material.donator = new Donator();
+    material.UserDonator = new UserDonator();
     material.heart = 54;
 
     this.setState({ ...this.state, material })

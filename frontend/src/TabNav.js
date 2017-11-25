@@ -9,7 +9,7 @@ import {
 } from 'react-navigation';
 
 
-import { mainColor } from './colors';
+import { mainColor } from './business/util/colors';
 import MaterialsScreen from './components/pages/MaterialsScreen';
 import MyAccountScreen from './components/pages/MyAccountScreen';
 import AnnounceScreen from './components/pages/AnnounceScreen';

@@ -6,7 +6,7 @@ import {
   View
 } from 'react-native';
 
-import { mainColor } from '../../colors';
+import { mainColor } from '../../business/util/colors';
 import ImageHeader from '../ImageHeader';
 import IconText from '../IconText';
 

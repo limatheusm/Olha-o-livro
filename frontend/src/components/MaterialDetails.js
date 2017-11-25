@@ -12,7 +12,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Entypo from 'react-native-vector-icons/Entypo';
 
-import { mainColor } from '../colors';
+import { mainColor } from '../business/util/colors';
 import IconText from './IconText';
 
 export default props => (

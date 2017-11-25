@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback
 } from 'react-native'
 
-import { Material } from './model'
+import { Material } from './../business/model/material'
 import Item from './Item'
 
 export default class ListItems extends Component {

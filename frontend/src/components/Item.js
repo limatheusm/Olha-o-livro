@@ -7,7 +7,7 @@ import {
     Image
 } from 'react-native'
 import Entypo from 'react-native-vector-icons/Entypo'
-import { mainColor } from '../colors'
+import { mainColor } from '../business/util/colors'
 
 export default class Item extends Component {
     constructor(props) {

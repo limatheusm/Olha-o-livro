@@ -1,4 +1,4 @@
-import { Donator } from './Donator'
+import { UserDonator } from '../user/'
 class Material {
     constructor(key) {
         this.title = "Livro de Python " + key;
@@ -10,7 +10,7 @@ class Material {
         this.imageURL = "https://s3.novatec.com.br/capas-ampliadas/capa-ampliada-9788575224083.jpg";
         this.local = "UFPB";
         this.date = "10/10/2017";
-        this.donator = new Donator();
+        this.donator = new UserDonator();
         this.heart = 54;
         this.key = key;
     }
