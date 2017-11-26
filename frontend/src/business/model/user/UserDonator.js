@@ -1,9 +1,9 @@
 import { User } from './';
 
-class UserAdm extends User {
+class UserDonator extends User {
     constructor() {
         super();
     }
 }
 
-export { UserAdm }
+export { UserDonator }
