@@ -18,8 +18,11 @@ export default class Item extends Component {
 
     _onPress() {
         console.log(this.state.material.title)
+        if (this.props.editMaterial === 'edit') {
+            this.props.navigation.navigate('EditMaterial', { material: this.state.material })
+        }else{
         this.props.navigation.navigate('Details', { material: this.state.material })
-
+        }
     }
 
     render() {
