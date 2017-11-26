@@ -11,14 +11,15 @@ import { UserDonator } from '../../business/model/user';
 
 export default class EditMaterialScreen extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    let donator = this.props.navigation.state.params.donator;
     this.state = {
-      donator: this.props.navigation.state.params.donator,
-      name: this.props.navigation.state.params.donator.name,
-      mail: this.props.navigation.state.params.donator.mail,
-      phone: this.props.navigation.state.params.donator.phone,
-      imageURL: this.props.navigation.state.params.donator.imageURL,
-      from: this.props.navigation.state.params.donator.from
+      donator: donator,
+      name: donator.name,
+      mail: donator.mail,
+      phone: donator.phone,
+      imageURL: donator.imageURL,
+      from: donator.from
     }
   }
 
@@ -26,8 +27,8 @@ export default class EditMaterialScreen extends Component {
     title: 'Editar Conta'
   }
 
-   editAccount() {
-    donator = this.state.donator;
+  editAccount() {
+    let donator = this.state.donator;
     donator.name = this.state.name;
     donator.mail = this.state.mail;
     donator.phone = this.state.phone;
@@ -35,7 +36,12 @@ export default class EditMaterialScreen extends Component {
     donator.from = this.state.from;
 
     this.setState({ ...this.state, donator })
+    // Atualiza no BD
     //console.log(donator)
+  }
+
+  deleteAccount() {
+    // Deleta conta do BD
   }
 
   render() {
@@ -77,7 +83,15 @@ export default class EditMaterialScreen extends Component {
               style={styles.button}
               onPress={() => this.editAccount()}
             >
-              <Text style={styles.textButton}> Atualizar! </Text>
+              <Text style={styles.textButton}> Atualizar </Text>
+            </Button>
+            <Button
+              danger
+              block
+              style={{ marginHorizontal: 20 }}
+              onPress={() => this.deleteAccount()}
+            >
+              <Text style={styles.textButton}> Deletar </Text>
             </Button>
           </Form>
         </Content>
@@ -87,7 +101,7 @@ export default class EditMaterialScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-    button: {
+  button: {
     margin: 20
   },
   textButton: {

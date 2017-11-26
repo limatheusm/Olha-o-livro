@@ -11,17 +11,18 @@ import { UserDonator } from '../../business/model/user';
 
 export default class EditMaterialScreen extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    let material = this.props.navigation.state.params.material;
     this.state = {
-      material: this.props.navigation.state.params.material,
-      title: this.props.navigation.state.params.material.title,
-      description: this.props.navigation.state.params.material.description,
-      imgURL: this.props.navigation.state.params.material.imgURL,
-      local: this.props.navigation.state.params.material.local,
-      type: this.props.navigation.state.params.material.type,
-      sharingType: this.props.navigation.state.params.material.sharingType, 
-      category: this.props.navigation.state.params.material.category 
-    }
+      material,
+      title: material.title,
+      description: material.description,
+      imageURL: material.imageURL,
+      local: material.local,
+      type: material.type,
+      sharingType: material.sharingType, 
+      category: material.category 
+    };
   }
 
   static navigationOptions = {
@@ -41,17 +42,18 @@ export default class EditMaterialScreen extends Component {
   }
 
   editMaterial() {
-    let material = new Material(1);
+    let material = this.state.material;
     material.title = this.state.title;
     material.type = this.state.sharingType;
     material.description = this.state.description;
-    material.imageURL = this.state.imgURL;
+    material.imageURL = this.state.imageURL;
     material.local = this.state.local;
     material.date = "10/10/2017";
-    material.UserDonator = new UserDonator();
-    material.heart = 54;
+    material.UserDonator = this.state.material.donator;
+    material.heart = this.state.material.donator;
 
-    this.setState({ ...this.state, material })
+    this.setState({ ...this.state, material });
+    // Atualiza no BD
   }
 
   render() {
@@ -62,8 +64,8 @@ export default class EditMaterialScreen extends Component {
             <Item stackedLabel>
               <Label>URL da Imagem</Label>
               <Input
-                onChangeText={imgURL => this.setState({ ...this.state, imgURL })}
-                value={this.state.imgURL}
+                onChangeText={imageURL => this.setState({ ...this.state, imageURL })}
+                value={this.state.imageURL}
               />
             </Item>
             <Item stackedLabel>
@@ -94,7 +96,7 @@ export default class EditMaterialScreen extends Component {
               <Picker
                 style={styles.picker}
                 mode="dropdown"
-                placeholder="Selecionar"
+                placeholder={this.state.type}
                 headerBackButtonText="Voltar"
                 iosHeader="Tipo do Material"
                 selectedValue={this.state.type}
@@ -110,14 +112,14 @@ export default class EditMaterialScreen extends Component {
               <Picker
                 style={styles.picker}
                 mode="dropdown"
-                placeholder="Selecionar"
+                placeholder={this.state.sharingType}
                 headerBackButtonText="Voltar"
                 iosHeader="Tipo do Compartilhamento"
                 selectedValue={this.state.sharingType}
                 onValueChange={this.onValuePickerSharingTypeChange.bind(this)}
               >
                 <Item label="Doação" value="donation" />
-                <Item label="Empréstimo" value="loan" />
+                <Item label="Empréstimo" value="loan" /> 
               </Picker>
             </Item>
             <Item>
@@ -125,7 +127,7 @@ export default class EditMaterialScreen extends Component {
               <Picker
                 style={styles.picker}
                 mode="dropdown"
-                placeholder="Selecionar"
+                placeholder={this.state.category}
                 headerBackButtonText="Voltar"
                 iosHeader="Categoria"
                 selectedValue={this.state.category}
@@ -142,7 +144,7 @@ export default class EditMaterialScreen extends Component {
               style={styles.button}
               onPress={() => this.editMaterial()}
             >
-              <Text style={styles.textButton}> Atualizar! </Text>
+              <Text style={styles.textButton}> Atualizar </Text>
             </Button>
           </Form>
         </Content>
