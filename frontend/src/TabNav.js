@@ -15,6 +15,9 @@ import MyAccountScreen from './components/pages/MyAccountScreen';
 import AnnounceScreen from './components/pages/AnnounceScreen';
 import DetailsScreen from './components/pages/DetailsScreen';
 import DonatorDetailsScreen from './components/pages/DonatorDetailsScreen';
+import MyItemsScreen from './components/pages/MyItemsScreen';
+import EditMaterialScreen from './components/pages/EditMaterialScreen';
+import EditAccountScreen from './components/pages/EditAccountScreen'
 
 //Controle das cores de navegação.
 const navOptions = {
@@ -65,6 +68,15 @@ const MyAccountNav = StackNavigator(
     {
         MyAccount: {
             screen: MyAccountScreen
+        },
+        MyItems: {
+            screen: MyItemsScreen
+        },
+        EditMaterial: {
+            screen: EditMaterialScreen
+        },
+        EditAccount: {
+            screen: EditAccountScreen
         }
     },
     {
