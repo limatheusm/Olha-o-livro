@@ -13,7 +13,7 @@ import Item from './Item'
 export default class ListItems extends Component {
   constructor(props) {
     super(props);
-    this.state = { items: [] }
+    this.state = { items: [], myItems: [] }
   }
 
   componentWillMount() {
@@ -26,14 +26,32 @@ export default class ListItems extends Component {
     items.push(new Material(6))
     items.push(new Material(7))
     this.setState({ ...this.state, items })
+
+    let myItems = this.state.myItems
+    myItems.push(new Material(1))
+    myItems.push(new Material(2))
+    this.setState({ ...this.state, myItems })
   }
 
   render() {
+    // renderiza apenas os materiais do doador
+    if(this.props.myItemsProps === 'myitems') {
+      return (
+        <View style={styles.container}>
+          <FlatList
+            data={this.state.myItems}
+            renderItem={({ item }) => <Item navigation={this.props.navigation} material={item} editMaterial='edit'></Item>}
+          />
+        </View>
+      );
+    }
+    
     return (
       <View style={styles.container}>
         <FlatList
           data={this.state.items}
           renderItem={({ item }) => <Item navigation={this.props.navigation} material={item}></Item>}
+          teste={() => console.log(this.props.navigation.donator)}
         />
       </View>
     );
