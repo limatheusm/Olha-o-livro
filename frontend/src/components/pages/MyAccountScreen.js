@@ -9,7 +9,7 @@ import {
 import ImageHeader from '../ImageHeader';
 import { UserDonator } from '../../business/model/user';
 import { Material } from '../../business/model/material/';
-import  MyAccountNav from './MyAccountNav';
+import  MyAccountNav from '../MyAccountNav';
 
 // Responsavel pela tela inicial da aba de navegação MyAccount
 // Renderiza os componentes ImageHeader e MyAccountNav
@@ -35,7 +35,7 @@ export default class MyAccountScreen extends Component {
         donator.mail = "donator@olhaolivro.com";
         donator.phone ="(83) 9 9988-8899";
         donator.imageURL = "https://scontent.frec3-2.fna.fbcdn.net/v/t1.0-9/20292831_1563732526991471_5299144803312892119_n.jpg?oh=82be979c7aebcc7dac4a9d6599e4e7a5&oe=5AA57AA0";
-        donator.materials = [new Material(1), new Material(2), new Material(3)];
+        donator.materials = [new Material(1), new Material(2), new Material(3), new Material(4)];
         donator.from = 'UFPB';
     
         this.setState({ ...this.state, donator })
