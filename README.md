@@ -3,12 +3,31 @@ __Backend__: API Restful feita em **NodeJS** + **Express** + **MongoDB**
 __Frontend__: Aplicação Mobile Nativa para Android e iOS feito em **React Native**.
 
 Para testar a aplicação, vá para [Execução](#execução).
+
 Para visualizar os Padrões de Projetos Implementados, vá para [Padrões](#padrões-de-projetos-implementados).
+
 ## Padrões de Projetos Implementados
+
+### Criação
+
+* [Singleton](#singleton)
+* [Abstract Factory](#abstract-factory)
+* [Factory Method](#factory-method)
+
+### Estrutural
+
+* [Facade](#facade)
+* [Proxy](#proxy)
+
+### Comportamental
+
+* [Iterator](#iterator)
+
+## Implemetações
 
 ### Singleton
 ```js
-// Arquivo frontend/src/business/control/material
+// Arquivo frontend/src/business/control/material/MaterialFactory
 
 ...
 
@@ -48,7 +67,7 @@ export default class MaterialFactory extends MaterialAbstractFactory {
 
 ### Abstract Factory
 ```js
-// Arquivo frontend/src/business/control/material
+// Arquivo frontend/src/business/control/material/MaterialAbstractFactory
 
 export default class MaterialAbstractFactory {
     constructor() { 
@@ -69,7 +88,7 @@ export default class MaterialAbstractFactory {
 
 ### Factory Method
 ```js
-// Arquivo frontend/src/business/control/material
+// Arquivo frontend/src/business/control/material/MaterialFactory
 
 export default class MaterialFactory extends MaterialAbstractFactory {
     
