@@ -3,18 +3,31 @@ __Backend__: API Restful feita em **NodeJS** + **Express** + **MongoDB**
 __Frontend__: Aplicação Mobile Nativa para Android e iOS feito em **React Native**.
 
 Para testar a aplicação, vá para [Execução](##Execução).
-
+Para visualizar os Padrões de Projetos Implementados, vá para [Padrões](##Padrões).
 ## Padrões de Projetos Implementados
-### Facade
-```js
 
-```
-### Factory Method
-```js
-
-```
 ### Singleton
 ```js
+// Arquivo frontend/src/business/control/material
+
+...
+
+let instance = null;
+
+export default class MaterialFactory extends MaterialAbstractFactory {
+    
+    constructor() { 
+        super();
+        
+        if (!instance) {
+            instance = this;
+        }
+
+        return instance;
+    }
+    
+    ...
+}
 
 ```
 
@@ -27,10 +40,58 @@ Para testar a aplicação, vá para [Execução](##Execução).
 ```js
 
 ```
-### Singleton
+
+### Facade
 ```js
 
 ```
+
+### Abstract Factory
+```js
+// Arquivo frontend/src/business/control/material
+
+export default class MaterialAbstractFactory {
+    constructor() { 
+
+    }
+    createMaterial() {
+        throw new Error("Abstract method!");
+    }
+    createPhysicalMaterial() {
+        throw new Error("Abstract method!");
+    }
+    createVirtualMaterial() {
+        throw new Error("Abstract method!");
+    }
+}
+
+```
+
+### Factory Method
+```js
+// Arquivo frontend/src/business/control/material
+
+export default class MaterialFactory extends MaterialAbstractFactory {
+    
+    ...
+
+    getMaterial(type) {
+        switch (type) {
+            case 'material':
+                return new Material();
+            case 'physicalMaterial':
+                return new PhysicalMaterial();
+            case 'virtualMaterial':
+                return new VirtualMaterial();
+            default:
+                throw new Error("Material type error!");
+        }
+    }
+}
+
+```
+
+
 
 
 ## Execução
