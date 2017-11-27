@@ -6,13 +6,14 @@ import {
   View
 } from 'react-native';
 
-import { mainColor } from '../../business/util/colors';
+import BusinessFacade from '../../business/BusinessFacade';
 import ImageHeader from '../ImageHeader';
 import IconText from '../IconText';
 
 export default class DonatorDetailsScreen extends Component {
   constructor(props) {
     super(props);
+    this._businessFacade = new BusinessFacade();
     this.state = { donator: this.props.navigation.state.params.donator };
   }
 
@@ -34,7 +35,7 @@ export default class DonatorDetailsScreen extends Component {
             font="FontAwesome"
             name="handshake-o"
             size={25}
-            color={mainColor}
+            color={this._businessFacade.getMainColor()}
             text="Já ajudou 5 pessoas"
             fontSize={20}
           />
@@ -42,7 +43,7 @@ export default class DonatorDetailsScreen extends Component {
             font="Entypo"
             name="open-book"
             size={25}
-            color={mainColor}
+            color={this._businessFacade.getMainColor()}
             text="10 Materiais cadastrados"
             fontSize={20}
           />
@@ -50,7 +51,7 @@ export default class DonatorDetailsScreen extends Component {
             font="FontAwesome"
             name="whatsapp"
             size={25}
-            color={mainColor}
+            color={this._businessFacade.getMainColor()}
             text={this.state.donator.phone}
             fontSize={20}
           />
@@ -58,7 +59,7 @@ export default class DonatorDetailsScreen extends Component {
             font="Feather"
             name="mail"
             size={25}
-            color={mainColor}
+            color={this._businessFacade.getMainColor()}
             text={this.state.donator.mail}
             fontSize={20}
           />

@@ -7,11 +7,12 @@ import {
     Image
 } from 'react-native'
 import Entypo from 'react-native-vector-icons/Entypo'
-import { mainColor } from '../business/util/colors'
+import BusinessFacade from '../business/BusinessFacade';
 
 export default class Item extends Component {
     constructor(props) {
         super(props)
+        this._businessFacade = new BusinessFacade();
         this.state = { material: this.props.material }
         this._onPress = this._onPress.bind(this)
     }
@@ -37,7 +38,7 @@ export default class Item extends Component {
                             <Entypo
                                 name='location-pin'
                                 size={18}
-                                style={{ color: mainColor }}
+                                style={{ color: this._businessFacade.getMainColor() }}
                             />
                             <Text style={local}>{this.state.material.local}</Text>
                         </View>

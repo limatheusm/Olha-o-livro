@@ -1,4 +1,5 @@
 import MaterialFactory from './control/material/MaterialFactory';
+import { mainColor } from './util/colors';
 
 export default class BusinessFacade {
 
@@ -15,6 +16,11 @@ export default class BusinessFacade {
     }
     createVirtualMaterial() {
         return this._materialFactory.createVirtualMaterial();
+    }
+    
+    // util.colors Methods
+    getMainColor() {
+        return mainColor;
     }
 
 }

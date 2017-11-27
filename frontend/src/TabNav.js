@@ -9,7 +9,7 @@ import {
 } from 'react-navigation';
 
 
-import { mainColor } from './business/util/colors';
+import BusinessFacade from './business/BusinessFacade';
 import MaterialsScreen from './components/pages/MaterialsScreen';
 import MyAccountScreen from './components/pages/MyAccountScreen';
 import AnnounceScreen from './components/pages/AnnounceScreen';
@@ -18,6 +18,8 @@ import DonatorDetailsScreen from './components/pages/DonatorDetailsScreen';
 import MyItemsScreen from './components/pages/MyItemsScreen';
 import EditMaterialScreen from './components/pages/EditMaterialScreen';
 import EditAccountScreen from './components/pages/EditAccountScreen'
+
+const mainColor = new BusinessFacade().getMainColor();
 
 //Controle das cores de navegação.
 const navOptions = {

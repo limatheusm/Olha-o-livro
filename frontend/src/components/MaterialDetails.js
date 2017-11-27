@@ -12,7 +12,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Entypo from 'react-native-vector-icons/Entypo';
 
-import { mainColor } from '../business/util/colors';
+import BusinessFacade from '../business/BusinessFacade';
 import IconText from './IconText';
 
 export default props => (
@@ -43,7 +43,7 @@ export default props => (
             font="FontAwesome"
             name="whatsapp"
             size={18}
-            color={mainColor}
+            color={new BusinessFacade().getMainColor()}
             text={props.material.donator.phone}
             fontSize={15}
         />
@@ -51,7 +51,7 @@ export default props => (
             font="Feather"
             name="mail"
             size={18}
-            color={mainColor}
+            color={new BusinessFacade().getMainColor()}
             text={props.material.donator.mail}
             fontSize={15}
         />

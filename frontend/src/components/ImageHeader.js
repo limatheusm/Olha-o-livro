@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 
-import { mainColor } from '../business/util/colors';
+import BusinessFacade from '../business/BusinessFacade';
 
 export default props => (
     <View style={styles.imageView}>
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         padding: 10,
         alignItems: 'center',
         position: 'relative',
-        backgroundColor: mainColor,
+        backgroundColor: new BusinessFacade().getMainColor(),
     },
     title: {
         fontSize: 15,
