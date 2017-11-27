@@ -50,6 +50,30 @@ export default class MaterialFactory extends MaterialAbstractFactory {
 
 ```
 
+```js
+// Arquivo frontend/src/business/control/user/UserFactory
+
+...
+
+let instance = null;
+
+export default class UserFactory extends UserAbstractFactory {
+    
+    constructor() { 
+        super();
+        
+        if (!instance) {
+            instance = this;
+        }
+
+        return instance;
+    }
+    
+    ...
+}
+
+```
+
 ### Proxy
 ```js
 
@@ -80,6 +104,26 @@ export default class MaterialAbstractFactory {
         throw new Error("Abstract method!");
     }
     createVirtualMaterial() {
+        throw new Error("Abstract method!");
+    }
+}
+
+```
+
+```js
+// Arquivo frontend/src/business/control/user/UserAbstractFactory
+
+export default class UserAbstractFactory {
+    constructor() { 
+
+    }
+    createUser() {
+        throw new Error("Abstract method!");
+    }
+    createUserAdm() {
+        throw new Error("Abstract method!");
+    }
+    createUserDonator() {
         throw new Error("Abstract method!");
     }
 }
@@ -117,6 +161,41 @@ export default class MaterialFactory extends MaterialAbstractFactory {
 
     createVirtualMaterial() {
         return new VirtualMaterial();
+    }
+}
+
+```
+
+```js
+// Arquivo frontend/src/business/control/user/UserFactory
+
+export default class UserFactory extends UserAbstractFactory {
+    
+    ...
+
+    getMaterial(type) {
+        switch (type) {
+            case 'user':
+                return this.createUser();
+            case 'userAdm':
+                return this.createUserAdm();
+            case 'userDonator':
+                return this.createUserDonator();
+            default:
+                throw new Error("Material type error!");
+        }
+    }
+
+    createUser() {
+        return new User();
+    }
+
+    createUserAdm() {
+        return new UserAdm();
+    }
+
+    createUserDonator() {
+        return new UserDonator();
     }
 }
 
