@@ -8,14 +8,8 @@ export default class BusinessFacade {
     }
 
     // MaterialFactory methods
-    createMaterial() {
-        return this._materialFactory.createMaterial();
-    }
-    createPhysicalMaterial() {
-        return this._materialFactory.createPhysicalMaterial();
-    }
-    createVirtualMaterial() {
-        return this._materialFactory.createVirtualMaterial();
+    getMaterial(type) {
+        return this._materialFactory.getMaterial(type);
     }
     
     // util.colors Methods

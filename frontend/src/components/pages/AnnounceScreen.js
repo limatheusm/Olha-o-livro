@@ -42,7 +42,7 @@ export default class AnnounceScreen extends Component {
   }
 
   announceMaterial() {
-    let material = this._businessFacade.createMaterial();
+    let material = this._businessFacade.getMaterial('material');
     material.title = this.state.title;
     material.type = this.state.sharingType;
     material.description = this.state.description;

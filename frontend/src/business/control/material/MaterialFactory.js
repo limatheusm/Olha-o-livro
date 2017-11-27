@@ -8,13 +8,16 @@ import {
 export default class MaterialFactory extends MaterialAbstractFactory {
     constructor() { super(); }
 
-    createMaterial() {
-        return new Material();
-    }
-    createPhysicalMaterial() {
-        return new PhysicalMaterial();
-    }
-    createVirtualMaterial() {
-        return new VirtualMaterial();
+    getMaterial(type) {
+        switch (type) {
+            case 'material':
+                return new Material();
+            case 'physicalMaterial':
+                return new PhysicalMaterial();
+            case 'virtualMaterial':
+                return new VirtualMaterial();
+            default:
+                throw new Error("Material type error!");
+        }
     }
 }

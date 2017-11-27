@@ -19,13 +19,13 @@ export default class ListItems extends Component {
 
   componentWillMount() {
     let items = this.state.items;
-    items.push(this._businessFacade.createMaterial());
-    items.push(this._businessFacade.createMaterial());
-    items.push(this._businessFacade.createMaterial());
-    items.push(this._businessFacade.createMaterial());
-    items.push(this._businessFacade.createMaterial());
-    items.push(this._businessFacade.createMaterial());
-    items.push(this._businessFacade.createMaterial());
+    items.push(this._businessFacade.getMaterial('material'));
+    items.push(this._businessFacade.getMaterial('material'));
+    items.push(this._businessFacade.getMaterial('material'));
+    items.push(this._businessFacade.getMaterial('material'));
+    items.push(this._businessFacade.getMaterial('material'));
+    items.push(this._businessFacade.getMaterial('material'));
+    items.push(this._businessFacade.getMaterial('material'));
     this.setState({ ...this.state, items });
 
 
