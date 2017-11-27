@@ -4,7 +4,7 @@ import { mainColor } from './util/colors';
 export default class BusinessFacade {
 
     constructor() {
-        this._materialFactory = new MaterialFactory();
+        this._materialFactory = new MaterialFactory(); //Singleton
     }
 
     // MaterialFactory methods

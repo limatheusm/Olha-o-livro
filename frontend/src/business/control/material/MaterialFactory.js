@@ -5,8 +5,20 @@ import {
     VirtualMaterial
 } from '../../model/material';
 
+let instance = null;
+
 export default class MaterialFactory extends MaterialAbstractFactory {
-    constructor() { super(); }
+    
+    constructor() { 
+        super();
+        
+        if (!instance) {
+            instance = this;
+        }
+
+        return instance;
+    }
+
 
     getMaterial(type) {
         switch (type) {
