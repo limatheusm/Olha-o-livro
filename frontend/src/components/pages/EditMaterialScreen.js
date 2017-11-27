@@ -6,7 +6,6 @@ import {
 
 import { Picker, Item, Button, Label, Input, Container, Content, Form } from 'native-base';
 
-import { Material } from '../../business/model/material';
 import { UserDonator } from '../../business/model/user';
 
 export default class EditMaterialScreen extends Component {

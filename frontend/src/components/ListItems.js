@@ -1,37 +1,38 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   FlatList,
   TouchableWithoutFeedback
-} from 'react-native'
+} from 'react-native';
 
-import { Material } from './../business/model/material'
-import Item from './Item'
+import BusinessFacade from './../business/BusinessFacade';
+import Item from './Item';
 
 export default class ListItems extends Component {
   constructor(props) {
     super(props);
+    this._businessFacade = new BusinessFacade();
     this.state = { items: [], myItems: [] }
   }
 
   componentWillMount() {
     let items = this.state.items;
-    items.push(new Material());
-    items.push(new Material());
-    items.push(new Material());
-    items.push(new Material());
-    items.push(new Material());
-    items.push(new Material());
-    items.push(new Material());
+    items.push(this._businessFacade.createMaterial());
+    items.push(this._businessFacade.createMaterial());
+    items.push(this._businessFacade.createMaterial());
+    items.push(this._businessFacade.createMaterial());
+    items.push(this._businessFacade.createMaterial());
+    items.push(this._businessFacade.createMaterial());
+    items.push(this._businessFacade.createMaterial());
     this.setState({ ...this.state, items });
 
 
     if (this.props.navigation.state.params) {
       if (this.props.navigation.state.params.donator) {
         let myItems = this.props.navigation.state.params.donator.materials;
-        this.setState({ ...this.state, myItems })
+        this.setState({ ...this.state, myItems });
       }
     }
   }

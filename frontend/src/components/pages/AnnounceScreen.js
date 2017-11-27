@@ -6,12 +6,13 @@ import {
 
 import { Picker, Item, Button, Label, Input, Container, Content, Form } from 'native-base';
 
-import { Material } from '../../business/model/material';
+import BusinessFacade from '../../business/BusinessFacade';
 import { UserDonator } from '../../business/model/user';
 
 export default class AnnounceScreen extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this._businessFacade = new BusinessFacade();
     this.state = {
       material: {},
       title: '',
@@ -41,7 +42,7 @@ export default class AnnounceScreen extends Component {
   }
 
   announceMaterial() {
-    let material = new Material();
+    let material = this._businessFacade.createMaterial();
     material.title = this.state.title;
     material.type = this.state.sharingType;
     material.description = this.state.description;
