@@ -5,10 +5,8 @@ import {
     VirtualMaterial
 } from '../../model/material';
 
-class MaterialFactory extends MaterialAbstractFactory {
-    constructor() {
-        super();
-    }
+export default class MaterialFactory extends MaterialAbstractFactory {
+    constructor() { super(); }
 
     createMaterial() {
         return new Material();

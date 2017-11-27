@@ -4,8 +4,10 @@ import {
     VirtualMaterial
 } from '../../model/material';
 
-export class MaterialAbstractFactory {
-    constructor() { }
+export default class MaterialAbstractFactory {
+    constructor() { 
+
+    }
     createMaterial() {
         throw new Error("Abstract method!");
     }
