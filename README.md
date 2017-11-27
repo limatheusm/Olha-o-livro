@@ -2,8 +2,8 @@
 __Backend__: API Restful feita em **NodeJS** + **Express** + **MongoDB**
 __Frontend__: Aplicação Mobile Nativa para Android e iOS feito em **React Native**.
 
-Para testar a aplicação, vá para [Execução](##execução).
-Para visualizar os Padrões de Projetos Implementados, vá para [Padrões](##padrões-de-projetos-implementados).
+Para testar a aplicação, vá para [Execução](##execucao).
+Para visualizar os Padrões de Projetos Implementados, vá para [Padrões](##padroes-de-projetos-implementados).
 ## Padrões de Projetos Implementados
 
 ### Singleton
