@@ -1,8 +1,8 @@
 import { Material } from './'
 
 class PhysicalMaterial extends Material {
-    constructor(key) {
-        super(key);
+    constructor() {
+        super();
         this._isbn = "978-85-7522-408-3"
     }
 

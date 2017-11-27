@@ -41,7 +41,7 @@ export default class AnnounceScreen extends Component {
   }
 
   announceMaterial() {
-    let material = new Material(1);
+    let material = new Material();
     material.title = this.state.title;
     material.type = this.state.sharingType;
     material.description = this.state.description;
