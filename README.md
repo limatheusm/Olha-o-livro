@@ -97,14 +97,26 @@ export default class MaterialFactory extends MaterialAbstractFactory {
     getMaterial(type) {
         switch (type) {
             case 'material':
-                return new Material();
+                return this.createMaterial();
             case 'physicalMaterial':
-                return new PhysicalMaterial();
+                return this.createPhysicalMaterial();
             case 'virtualMaterial':
-                return new VirtualMaterial();
+                return this.createVirtualMaterial();
             default:
                 throw new Error("Material type error!");
         }
+    }
+
+    createMaterial() {
+        return new Material();
+    }
+
+    createPhysicalMaterial() {
+        return new PhysicalMaterial();
+    }
+
+    createVirtualMaterial() {
+        return new VirtualMaterial();
     }
 }
 
