@@ -3,10 +3,7 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
-
 import { Picker, Item, Button, Label, Input, Container, Content, Form } from 'native-base';
-
-import { UserDonator } from '../../business/model/user';
 
 export default class EditMaterialScreen extends Component {
   constructor(props) {

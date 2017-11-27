@@ -7,7 +7,6 @@ import {
 import { Picker, Item, Button, Label, Input, Container, Content, Form } from 'native-base';
 
 import BusinessFacade from '../../business/BusinessFacade';
-import { UserDonator } from '../../business/model/user';
 
 export default class AnnounceScreen extends Component {
   constructor(props) {
@@ -49,7 +48,7 @@ export default class AnnounceScreen extends Component {
     material.imageURL = this.state.imgURL;
     material.local = this.state.local;
     material.date = "10/10/2017";
-    material.UserDonator = new UserDonator();
+    material.UserDonator = this._businessFacade.getUser('userDonator');
     material.heart = 54;
 
     this.setState({ ...this.state, material })

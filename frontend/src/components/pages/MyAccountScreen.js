@@ -7,9 +7,9 @@ import {
 } from 'react-native';
 
 import ImageHeader from '../ImageHeader';
-import { UserDonator } from '../../business/model/user';
-import BusinessFacade from '../../business/BusinessFacade';
 import MyAccountNav from '../MyAccountNav';
+
+import BusinessFacade from '../../business/BusinessFacade';
 
 // Responsavel pela tela inicial da aba de navegação MyAccount
 // Renderiza os componentes ImageHeader e MyAccountNav
@@ -31,7 +31,7 @@ export default class MyAccountScreen extends Component {
 
     // inicializa o objeto de teste
     componentWillMount() {
-        let donator = new UserDonator();
+        let donator = this._businessFacade.getUser('userDonator');
         donator.name = "Donator 1";
         donator.mail = "donator@olhaolivro.com";
         donator.phone = "(83) 9 9988-8899";
