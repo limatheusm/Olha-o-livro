@@ -1,0 +1,7 @@
+export const URL_LIST_ALL_MATERIAL = ''
+export const URL_LIST_MY_MATERIAL = ''
+export const URL_EDIT_MATERIAL = ''
+export const URL_MATERIAL_REGISTER_FORM = ''
+export const URL_USER_EDIT_FORM = ''
+export const URL_USER_REGISTER_FORM = ''
+export const URL_USER_LOGIN_FORM = ''
