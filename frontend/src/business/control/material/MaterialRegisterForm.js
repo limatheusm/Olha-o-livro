@@ -1,5 +1,5 @@
 import axios from 'axios'
-import URL_MATERIAL_REGISTER_FORM from '../../util/routes'
+import { URL_MATERIAL_REGISTER_FORM } from '../../util/routes'
 
 export default class MaterialRegisterForm {
 
