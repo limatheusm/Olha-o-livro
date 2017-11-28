@@ -3,8 +3,8 @@ import { User } from './';
 class UserAdm extends User {
     constructor() {
         super();
-        this._tokenAuth = "oolivroadm";
+        this.tokenAuth = 'oolivroadm';
     }
 }
 
-export { UserAdm }
+export { UserAdm };

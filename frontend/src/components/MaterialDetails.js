@@ -8,9 +8,6 @@ import {
     TouchableHighlight,
     Dimensions
 } from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Feather from 'react-native-vector-icons/Feather';
-import Entypo from 'react-native-vector-icons/Entypo';
 
 import BusinessFacade from '../business/BusinessFacade';
 import IconText from './IconText';
@@ -38,7 +35,9 @@ export default props => (
 
         </View>
         <Text style={styles.description}>{props.material.description}</Text>
-        <Text style={{ paddingBottom: 10, fontStyle: 'italic' }}>Ficou interessado? Entre em contato com o doador! </Text>
+        <Text style={{ paddingBottom: 10, fontStyle: 'italic' }}>
+          Ficou interessado? Entre em contato com o doador! 
+        </Text>
         <IconText
             font="FontAwesome"
             name="whatsapp"
@@ -82,7 +81,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontStyle: 'italic',
         marginBottom: 20,
-        color: "gray"
+        color: 'gray'
     },
     description: {
         textAlign: 'justify',
@@ -104,6 +103,6 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontStyle: 'italic',
         marginBottom: 5,
-        color: "gray"
+        color: 'gray'
     }
-})
+});

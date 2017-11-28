@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
   StyleSheet,
-  FlatList,
-  TouchableWithoutFeedback
+  FlatList
 } from 'react-native';
 
 import BusinessFacade from './../business/BusinessFacade';
@@ -13,25 +11,25 @@ import Item from './Item';
 export default class ListItems extends Component {
   constructor(props) {
     super(props);
-    this._businessFacade = new BusinessFacade();
-    this.state = { items: [], myItems: [] }
+    this.businessFacade = new BusinessFacade();
+    this.state = { items: [], myItems: [] };
   }
 
   componentWillMount() {
-    let items = this.state.items;
-    items.push(this._businessFacade.getMaterial('material'));
-    items.push(this._businessFacade.getMaterial('material'));
-    items.push(this._businessFacade.getMaterial('material'));
-    items.push(this._businessFacade.getMaterial('material'));
-    items.push(this._businessFacade.getMaterial('material'));
-    items.push(this._businessFacade.getMaterial('material'));
-    items.push(this._businessFacade.getMaterial('material'));
+    const items = this.state.items;
+    items.push(this.businessFacade.getMaterial('material'));
+    items.push(this.businessFacade.getMaterial('material'));
+    items.push(this.businessFacade.getMaterial('material'));
+    items.push(this.businessFacade.getMaterial('material'));
+    items.push(this.businessFacade.getMaterial('material'));
+    items.push(this.businessFacade.getMaterial('material'));
+    items.push(this.businessFacade.getMaterial('material'));
     this.setState({ ...this.state, items });
 
 
     if (this.props.navigation.state.params) {
       if (this.props.navigation.state.params.donator) {
-        let myItems = this.props.navigation.state.params.donator.materials;
+        const myItems = this.props.navigation.state.params.donator.materials;
         this.setState({ ...this.state, myItems });
       }
     }
@@ -59,4 +57,4 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   }
-})
+});

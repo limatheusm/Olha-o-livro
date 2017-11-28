@@ -8,10 +8,14 @@ import { Picker, Item, Button, Label, Input, Container, Content, Form } from 'na
 
 import BusinessFacade from '../../business/BusinessFacade';
 
-export default class AnnounceScreen extends Component {
+export default class AnnounceScreen extends Component {  
+  static navigationOptions = {
+    title: 'Anunciar'
+  }
+
   constructor(props) {
     super(props);
-    this._businessFacade = new BusinessFacade();
+    this.businessFacade = new BusinessFacade();
     this.state = {
       material: {},
       title: '',
@@ -22,10 +26,6 @@ export default class AnnounceScreen extends Component {
       sharingType: '',
       category: ''
     }
-  }
-
-  static navigationOptions = {
-    title: 'Anunciar'
   }
 
   onValuePickerTypeChange(type) {
@@ -41,14 +41,14 @@ export default class AnnounceScreen extends Component {
   }
 
   announceMaterial() {
-    let material = this._businessFacade.getMaterial('material');
+    const material = this.businessFacade.getMaterial('material');
     material.title = this.state.title;
     material.type = this.state.sharingType;
     material.description = this.state.description;
     material.imageURL = this.state.imgURL;
     material.local = this.state.local;
-    material.date = "10/10/2017";
-    material.UserDonator = this._businessFacade.getUser('userDonator');
+    material.date = '10/10/2017';
+    material.UserDonator = this.businessFacade.getUser('userDonator');
     material.heart = 54;
 
     this.setState({ ...this.state, material })

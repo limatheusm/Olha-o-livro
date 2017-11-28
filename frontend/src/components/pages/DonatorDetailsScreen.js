@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Text,
   Dimensions,
   View
 } from 'react-native';
@@ -11,14 +10,14 @@ import ImageHeader from '../ImageHeader';
 import IconText from '../IconText';
 
 export default class DonatorDetailsScreen extends Component {
-  constructor(props) {
-    super(props);
-    this._businessFacade = new BusinessFacade();
-    this.state = { donator: this.props.navigation.state.params.donator };
-  }
-
   static navigationOptions = {
     title: 'Doador'
+  }
+
+  constructor(props) {
+    super(props);
+    this.businessFacade = new BusinessFacade();
+    this.state = { donator: this.props.navigation.state.params.donator };
   }
 
   render() {
@@ -35,7 +34,7 @@ export default class DonatorDetailsScreen extends Component {
             font="FontAwesome"
             name="handshake-o"
             size={25}
-            color={this._businessFacade.getMainColor()}
+            color={this.businessFacade.getMainColor()}
             text="Já ajudou 5 pessoas"
             fontSize={20}
           />
@@ -43,7 +42,7 @@ export default class DonatorDetailsScreen extends Component {
             font="Entypo"
             name="open-book"
             size={25}
-            color={this._businessFacade.getMainColor()}
+            color={this.businessFacade.getMainColor()}
             text="10 Materiais cadastrados"
             fontSize={20}
           />
@@ -51,7 +50,7 @@ export default class DonatorDetailsScreen extends Component {
             font="FontAwesome"
             name="whatsapp"
             size={25}
-            color={this._businessFacade.getMainColor()}
+            color={this.businessFacade.getMainColor()}
             text={this.state.donator.phone}
             fontSize={20}
           />
@@ -59,13 +58,13 @@ export default class DonatorDetailsScreen extends Component {
             font="Feather"
             name="mail"
             size={25}
-            color={this._businessFacade.getMainColor()}
+            color={this.businessFacade.getMainColor()}
             text={this.state.donator.mail}
             fontSize={20}
           />
         </View>
       </View>
-    )
+    );
   }
 }
 

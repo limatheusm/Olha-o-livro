@@ -1,20 +1,10 @@
-import { Material } from './'
+import { Material } from './';
 
 class VirtualMaterial extends Material {
     constructor() {
         super();
-        this._link = "http://www.dcc.ufrj.br/~fabiom/mab225/pythonbasico.pdf"
-    }
-
-    get link() {
-        return this._link;
-    }
-
-    set link(link) {
-        if (link) {
-            this._link = link;
-        }
+        this.link = 'http://www.dcc.ufrj.br/~fabiom/mab225/pythonbasico.pdf';
     }
 }
 
-export { VirtualMaterial }
+export { VirtualMaterial };

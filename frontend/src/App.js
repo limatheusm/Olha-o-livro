@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-import TabNav from './TabNav'
+import TabNav from './TabNav';
 
 export default class App extends Component {
   render() {
     return (
-      <TabNav/>
+      <TabNav />
     );
   }
 }

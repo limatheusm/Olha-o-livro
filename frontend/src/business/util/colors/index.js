@@ -1,3 +1,3 @@
-const mainColor = "#2196F3"
+const mainColor = '#2196F3';
 
-export { mainColor }
+export { mainColor };

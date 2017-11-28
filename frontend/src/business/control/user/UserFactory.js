@@ -1,46 +1,45 @@
 import UserAbstractFactory from './UserAbstractFactory';
 import {
-    User,
-    UserAdm,
-    UserDonator
+  User,
+  UserAdm,
+  UserDonator
 } from '../../model/user';
 
 let instance = null;
 
 export default class UserFactory extends UserAbstractFactory {
-    
-    constructor() { 
-        super();
-        
-        if (!instance) {
-            instance = this;
-        }
+  constructor() {
+    super();
 
-        return instance;
+    if (!instance) {
+      instance = this;
     }
 
-    getUser(type) {
-        switch (type) {
-            case 'user':
-                return this.createUser();
-            case 'userAdm':
-                return this.createUserAdm();
-            case 'userDonator':
-                return this.createUserDonator();
-            default:
-                throw new Error("User type error!");
-        }
-    }
+    return instance;
+  }
 
-    createUser() {
-        return new User();
+  getUser(type) {
+    switch (type) {
+      case 'user':
+        return this.createUser();
+      case 'userAdm':
+        return this.createUserAdm();
+      case 'userDonator':
+        return this.createUserDonator();
+      default:
+        throw new Error('User type error!');
     }
+  }
 
-    createUserAdm() {
-        return new UserAdm();
-    }
+  createUser() {
+    return new User();
+  }
 
-    createUserDonator() {
-        return new UserDonator();
-    }
+  createUserAdm() {
+    return new UserAdm();
+  }
+
+  createUserDonator() {
+    return new UserDonator();
+  }
 }

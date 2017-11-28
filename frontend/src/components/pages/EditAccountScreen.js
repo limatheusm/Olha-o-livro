@@ -6,21 +6,21 @@ import {
 import { Picker, Item, Button, Label, Input, Container, Content, Form } from 'native-base';
 
 export default class EditMaterialScreen extends Component {
+  static navigationOptions = {
+    title: 'Editar Conta'
+  }
+
   constructor(props) {
     super(props);
-    let donator = this.props.navigation.state.params.donator;
+    const donator = this.props.navigation.state.params.donator;
     this.state = {
-      donator: donator,
+      donator,
       name: donator.name,
       mail: donator.mail,
       phone: donator.phone,
       imageURL: donator.imageURL,
       from: donator.from
-    }
-  }
-
-  static navigationOptions = {
-    title: 'Editar Conta'
+    };
   }
 
   editAccount() {

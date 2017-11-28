@@ -6,9 +6,13 @@ import {
 import { Picker, Item, Button, Label, Input, Container, Content, Form } from 'native-base';
 
 export default class EditMaterialScreen extends Component {
+  static navigationOptions = {
+    title: 'Editar Material'
+  }
+
   constructor(props) {
     super(props);
-    let material = this.props.navigation.state.params.material;
+    const material = this.props.navigation.state.params.material;
     this.state = {
       material,
       title: material.title,
@@ -16,13 +20,9 @@ export default class EditMaterialScreen extends Component {
       imageURL: material.imageURL,
       local: material.local,
       type: material.type,
-      sharingType: material.sharingType, 
-      category: material.category 
+      sharingType: material.sharingType,
+      category: material.category
     };
-  }
-
-  static navigationOptions = {
-    title: 'Editar Material'
   }
 
   onValuePickerTypeChange(type) {
@@ -38,13 +38,13 @@ export default class EditMaterialScreen extends Component {
   }
 
   editMaterial() {
-    let material = this.state.material;
+    const material = this.state.material;
     material.title = this.state.title;
     material.type = this.state.sharingType;
     material.description = this.state.description;
     material.imageURL = this.state.imageURL;
     material.local = this.state.local;
-    material.date = "10/10/2017";
+    material.date = '10/10/2017';
     material.UserDonator = this.state.material.donator;
     material.heart = this.state.material.donator;
 
@@ -76,7 +76,7 @@ export default class EditMaterialScreen extends Component {
               <Input
                 onChangeText={description => this.setState({ ...this.state, description })}
                 value={this.state.description}
-                multiline={true}
+                multiline
                 style={{ paddingBottom: 15, paddingTop: 15 }}
               />
             </Item>
@@ -115,7 +115,7 @@ export default class EditMaterialScreen extends Component {
                 onValueChange={this.onValuePickerSharingTypeChange.bind(this)}
               >
                 <Item label="Doação" value="donation" />
-                <Item label="Empréstimo" value="loan" /> 
+                <Item label="Empréstimo" value="loan" />
               </Picker>
             </Item>
             <Item>
@@ -145,7 +145,7 @@ export default class EditMaterialScreen extends Component {
           </Form>
         </Content>
       </Container>
-    )
+    );
   }
 }
 
