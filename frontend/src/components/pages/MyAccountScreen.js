@@ -8,6 +8,7 @@ import {
 
 import ImageHeader from '../ImageHeader';
 import MyAccountNav from '../MyAccountNav';
+import LoginScreen from '../pages/LoginScreen';
 
 import BusinessFacade from '../../business/BusinessFacade';
 
@@ -58,6 +59,7 @@ export default class MyAccountScreen extends Component {
 
     static navigationOptions = {
         title: 'Minha Conta'
+        //title: 'Fazer Login'
     }
 
     render() {
@@ -71,6 +73,7 @@ export default class MyAccountScreen extends Component {
                 />
                 <MyAccountNav _onPress={this._onPress} />
             </View>
+            //<LoginScreen navigation={this.props.navigation}/>
         )
     }
 }

@@ -17,7 +17,9 @@ import DetailsScreen from './components/pages/DetailsScreen';
 import DonatorDetailsScreen from './components/pages/DonatorDetailsScreen';
 import MyItemsScreen from './components/pages/MyItemsScreen';
 import EditMaterialScreen from './components/pages/EditMaterialScreen';
-import EditAccountScreen from './components/pages/EditAccountScreen'
+import EditAccountScreen from './components/pages/EditAccountScreen';
+import LoginScreen from './components/pages/LoginScreen';
+import CreateAccountScreen from './components/pages/CreateAccountScreen';
 
 const mainColor = new BusinessFacade().getMainColor();
 
@@ -79,6 +81,12 @@ const MyAccountNav = StackNavigator(
         },
         EditAccount: {
             screen: EditAccountScreen
+        },
+        Login: {
+            screen: LoginScreen
+        },
+        CreateAccount: {
+            screen: CreateAccountScreen
         }
     },
     {
