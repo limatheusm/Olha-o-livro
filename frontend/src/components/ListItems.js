@@ -4,7 +4,7 @@ import {
   StyleSheet,
   FlatList,
   Text,
-  ActivityIndicator
+  RefreshControl
 } from 'react-native';
 
 import BusinessFacade from './../business/BusinessFacade';
@@ -14,7 +14,7 @@ export default class ListItems extends Component {
   constructor(props) {
     super(props);
     this.businessFacade = new BusinessFacade();
-    this.state = { items: [], myItems: [], refresh: true };
+    this.state = { items: [], myItems: [], refreshing: true };
   }
 
   // Recupera os materiais cadastrados no banco
@@ -30,19 +30,21 @@ export default class ListItems extends Component {
   }
 
   refresh() {
+    this.setState({ ...this.state, refreshing: true });
+    console.log('refreshing..');
     this.businessFacade.getListAllMaterials(
       (isSuccess, res) => {
-        this.setState({ ...this.state, items: res, refresh: false });
+        if (isSuccess) {
+          this.setState({ ...this.state, items: res, refreshing: false });
+        } else {
+          this.setState({ ...this.state, items: [], refreshing: false });
+        }
       }
     );
   }
 
   render() {
-    if (this.state.refresh) {
-      return <ActivityIndicator style={{ marginTop: 50 }} />;
-    }
-
-    if (this.state.items.length == 0 && !this.state.refresh) {
+    if (this.state.items.length == 0 && !this.state.refreshing) {
       return (
         <Text style={{ marginTop: 50, alignSelf: 'center' }}>
           Nenhum livro cadastrado :(
@@ -53,6 +55,12 @@ export default class ListItems extends Component {
     return (
       <View style={styles.container}>
         <FlatList
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={() => this.refresh.bind(this)}
+            />
+          }
           data={this.state.myItems.length != 0 ? this.state.myItems : this.state.items}
           keyExtractor={(item, index) => index}
           renderItem={
