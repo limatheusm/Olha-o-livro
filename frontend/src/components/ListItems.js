@@ -39,12 +39,13 @@ export default class ListItems extends Component {
     return (
       <View style={styles.container}>
         <FlatList
-          data={this.state.myItems.length != 0 ? this.state.myItems : this.state.items}
+          data={this.state.myItems.length !== 0 ? this.state.myItems : this.state.items}
+          keyExtractor={(item, index) => index}
           renderItem={
             ({ item }) => <Item
               navigation={this.props.navigation}
               material={item}
-              editMaterial={this.state.myItems != 0 ? true : false}
+              editMaterial={this.state.myItems !== 0 ? true : false}
             />
           }
         />

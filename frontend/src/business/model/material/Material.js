@@ -2,8 +2,7 @@ import { User } from '../user/';
 
 class Material {
     constructor() {
-        this.key = Math.floor(Math.random() * 99) + 1; // Gera numero aleatorio 1-99
-        this.title = `Livro de Python ${this.key}`;
+        this.title = 'Livro de Python';
         this.type = 'Livro';
         this.category = 'Programação';
         this.sharingType = 'Empréstimo';
@@ -14,6 +13,7 @@ class Material {
         this.date = '10/10/2017';
         this.donator = new User();
         this.heart = 54;
+        this.available = true;
     }
 }
 

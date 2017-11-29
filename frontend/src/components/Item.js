@@ -19,9 +19,9 @@ export default class Item extends Component {
 
   onPress() {
     if (this.props.editMaterial) {
-      this.props.navigation.navigate('EditMaterial', { material: this.state.material })
+      this.props.navigation.navigate('EditMaterial', { material: this.state.material });
     } else {
-      this.props.navigation.navigate('Details', { material: this.state.material })
+      this.props.navigation.navigate('Details', { material: this.state.material });
     }
   }
 
