@@ -25,11 +25,11 @@ export default class UserLoginForm {
       await AsyncStorage.setItem(CURRENT_USER_KEY, JSON.stringify(currentUser));
     } catch (error) {
       // Error saving data
-      console.log('Error saving data');
+      throw new Error('Error saving data');
     }
   }
 
-  async getCurrentUser() {
+  async getCurrentUser(promisse) {
     try {
       console.log('Recuperando usuario logado...');
       const response = await AsyncStorage.getItem(CURRENT_USER_KEY);
@@ -37,12 +37,11 @@ export default class UserLoginForm {
         // We have data!!
         console.log('Usuario logado recuperado!');
         const currentUser = await JSON.parse(response) || [];
-        console.log(currentUser);
-        return currentUser;
+        promisse(currentUser);
       }
     } catch (error) {
       // Error fetching data
-      console.log('Error fetching data');
+      throw new Error('Error fetching data');
     }
     return undefined;
   }

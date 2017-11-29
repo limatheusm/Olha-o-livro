@@ -1,6 +1,6 @@
 class User {
     constructor() {
-        this._id = '';
+        //this._id = '';
         this.name = 'User';
         this.mail = 'user@olhaolivro.com';
         this.password = 'Lima1234567';

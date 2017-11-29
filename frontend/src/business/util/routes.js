@@ -1,5 +1,5 @@
 export const URL = 'http://localhost:3003/api';
-export const URL_LIST_ALL_MATERIAL = '';
+export const URL_LIST_ALL_MATERIAL = `${URL}/material/get/all`;
 export const URL_LIST_CATEGORY = `${URL}/material/list/`;
 export const URL_LIST_TITLE = `${URL}/material/search/`;
 export const URL_MATERIAL_GET = `${URL}/material/`;
