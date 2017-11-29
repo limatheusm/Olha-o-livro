@@ -58,6 +58,46 @@ export default class MaterialScreen extends Component {
     //   ...this.businessFacade.getUser('userDonator'),
     //   _id: '5a1df25a18314d186a2506a8'
     // }, (isSuccess, res) => console.log(res));
+
+    /* Materials Methods */
+    
+    // this.businessFacade.getListAllMaterials((isSuccess, res) => console.log(res));
+    
+    // this.businessFacade.registerMaterial(
+    //   this.businessFacade.getMaterial('material'),
+    //   (isSuccess, res) => console.log(isSuccess)
+    // );
+
+    // this.businessFacade.deleteMaterial(
+    //   { ...this.businessFacade.getMaterial('material'), _id: '5a1ec2848d1e59237284f771' },
+    //   (isSuccess, res) => console.log(isSuccess)
+    // );
+
+    // this.businessFacade.getDataMaterial(
+    //   { ...this.businessFacade.getMaterial('material'), _id: '5a1eca89b1a6cb26edef70c7' }, 
+    //   (isSuccess, res) => console.log(res)
+    // );
+
+    // this.businessFacade.getMaterialCategory('Programação', (isSuccess, res) => console.log(res));
+    
+    // this.businessFacade.getMaterialTitle('Livro de Python', (isSuccess, res) => console.log(res));
+
+    // this.businessFacade.editMaterial(
+    //   { 
+    //     ...this.businessFacade.getMaterial('material'),
+    //     _id: '5a1eca89b1a6cb26edef70c7',
+    //     title: 'Livro de C' 
+    //   },
+    //   (isSuccess, res) => console.log(res)
+    // );
+
+    // this.businessFacade.increasesMaterialRate(
+    //   { 
+    //     ...this.businessFacade.getMaterial('material'),
+    //     _id: '5a1eca89b1a6cb26edef70c7'
+    //   },
+    //   (isSuccess, res) => console.log(res)
+    // );
   }
 
   render() {

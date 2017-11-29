@@ -1,5 +1,6 @@
 import MaterialFactory from './control/material/MaterialFactory';
 import MaterialRegisterForm from './control/material/MaterialRegisterForm';
+import MaterialEditForm from './control/material/MaterialEditForm';
 import ListMaterials from './control/material/ListMaterials';
 import UserEditForm from './control/user/UserEditForm';
 import UserRegisterForm from './control/user/UserRegisterForm';
@@ -17,6 +18,7 @@ export default class BusinessFacade {
 
     // Material
     this.materialRegisterForm = new MaterialRegisterForm();
+    this.materialEditForm = new MaterialEditForm();
     this.listMaterials = new ListMaterials();
 
     // User
@@ -39,34 +41,69 @@ export default class BusinessFacade {
   /***** Materials Methods *****/
 
   // ListMaterials Methods
+  
+  getListAllMaterials(promisse) {
+    this.listMaterials.getListAllMaterials((isSuccess, res) =>
+      this.handlePromisseResponse(isSuccess, res, promisse));
+  }
+
+  getDataMaterial(material, promisse) {
+    this.listMaterials.getMaterial(material, 
+      (isSuccess, res) => this.handlePromisseResponse(isSuccess, res, promisse));
+  }
+
+  getMaterialCategory(category, promisse) {
+    this.listMaterials.getMaterialCategory(category,
+      (isSuccess, res) => this.handlePromisseResponse(isSuccess, res, promisse));
+  }
+
+  getMaterialTitle(title, promisse) {
+    this.listMaterials.getMaterialTitle(title,
+      (isSuccess, res) => this.handlePromisseResponse(isSuccess, res, promisse));
+  }
+
+  getListMyMaterials() {
+
+  }
 
   // MaterialRegister Methods
-  // registerMaterial() {
-  //   const material = this.materialFactory.getMaterial('material');
-  //   this.materialRegisterForm.registerMaterial(material, (isSuccess, res) => {
-  //     if (isSuccess) {
-  //       console.log('Conectou ao DB!');
-  //       console.log(res);
-  //     } else {
-  //       console.log('Nao Conectou ao DB!');
-  //       console.log(res);
-  //     }
-  //   });
-  // }
+  
+  registerMaterial(material, promisse) {
+    this.materialRegisterForm.registerMaterial(material, 
+      (isSuccess, res) => this.handlePromisseResponse(isSuccess, res, promisse));
+  }
+
+  // MaterialEditForm Methods
+
+  deleteMaterial(material, promisse) {
+    this.materialEditForm.deleteMaterial(material,
+      (isSuccess, res) => this.handlePromisseResponse(isSuccess, res, promisse));
+  }
+
+  editMaterial(material, promisse) {
+    this.materialEditForm.editMaterial(material,
+      (isSuccess, res) => this.handlePromisseResponse(isSuccess, res, promisse));
+  }
+
+  increasesMaterialRate(material, promisse) {
+    this.materialEditForm.increasesMaterialRate(material,
+      (isSuccess, res) => this.handlePromisseResponse(isSuccess, res, promisse));
+  }
+
 
   /***** User Methods *****/
 
   /* UserEditForm Methods */
   registerUser(user, promisse) {
     this.userRegisterForm.registerUser(user,
-      (isSuccess, res) => this.handleResponse(isSuccess, res, promisse));
+      (isSuccess, res) => this.handlePromisseResponse(isSuccess, res, promisse));
   }
 
   /* UserLoginForm Methods */
 
   loginUser(user, promisse) {
     this.userLoginForm.getUserLogin(user,
-      (isSuccess, res) => this.handleResponse(isSuccess, res, promisse));
+      (isSuccess, res) => this.handlePromisseResponse(isSuccess, res, promisse));
   }
 
   getCurrentUser(response) {
@@ -93,7 +130,7 @@ export default class BusinessFacade {
         this.userEditForm.deleteUser(user,
           (isSuccess, res) => {
             currentUserLogged = null;
-            this.handleResponse(isSuccess, res, promisse);
+            this.handlePromisseResponse(isSuccess, res, promisse);
           });
       }
     });
@@ -101,13 +138,13 @@ export default class BusinessFacade {
 
   updateUser(user, promisse) {
     this.userEditForm.editUser(user,
-      (isSuccess, res) => this.handleResponse(isSuccess, res, promisse));
+      (isSuccess, res) => this.handlePromisseResponse(isSuccess, res, promisse));
   }
 
   /* UserGetDonator */
-  getDataDonator(donator, response) {
+  getDataDonator(donator, promisse) {
     this.userGetDonator.getDonator(donator, 
-      (isSuccess, res) => this.handleResponse(isSuccess, res, response));
+      (isSuccess, res) => this.handlePromisseResponse(isSuccess, res, promisse));
   }
 
   // util.colors Methods
@@ -116,7 +153,7 @@ export default class BusinessFacade {
   }
 
   // helper
-  handleResponse(isSuccess, res, promisse) {
+  handlePromisseResponse(isSuccess, res, promisse) {
     if (isSuccess) {
       console.log('Conectou ao DB!');
       const data = res.data;

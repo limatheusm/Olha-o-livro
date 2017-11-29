@@ -7,19 +7,25 @@ import {
 
 export default class MaterialEditForm {
   editMaterial(material, response) {
-    axios.put(URL_EDIT_MATERIAL, material)
+    axios.put(URL_EDIT_MATERIAL, material, {
+      headers: { token: 'oolivro' }
+    })
       .then(res => response(true, res))
       .catch(err => response(false, err));
   }
 
   deleteMaterial(material, response) {
-    axios.delete(`${URL_DELETE_MATERIAL}?id=${material.id}`)
+    axios.delete(`${URL_DELETE_MATERIAL}?id=${material._id}`, {
+      headers: { token: 'oolivro' }
+    })
       .then(res => response(true, res))
       .catch(err => response(false, err));
   }
 
-  editMaterialRate(material, response) {
-    axios.put(`${URL_MATERIAL_RATE}?id=${material.id}`, material)
+  increasesMaterialRate(material, response) {
+    axios.put(URL_MATERIAL_RATE, material, {
+      headers: { token: 'oolivro' }
+    })
       .then(res => response(true, res))
       .catch(err => response(false, err));
   }

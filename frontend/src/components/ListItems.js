@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
-  FlatList
+  FlatList,
+  Text,
+  ActivityIndicator
 } from 'react-native';
 
 import BusinessFacade from './../business/BusinessFacade';
@@ -12,21 +14,13 @@ export default class ListItems extends Component {
   constructor(props) {
     super(props);
     this.businessFacade = new BusinessFacade();
-    this.state = { items: [], myItems: [] };
+    this.state = { items: [], myItems: [], refresh: true };
   }
 
+  // Recupera os materiais cadastrados no banco
   componentWillMount() {
-    const items = this.state.items;
-    items.push(this.businessFacade.getMaterial('material'));
-    items.push(this.businessFacade.getMaterial('material'));
-    items.push(this.businessFacade.getMaterial('material'));
-    items.push(this.businessFacade.getMaterial('material'));
-    items.push(this.businessFacade.getMaterial('material'));
-    items.push(this.businessFacade.getMaterial('material'));
-    items.push(this.businessFacade.getMaterial('material'));
-    this.setState({ ...this.state, items });
-
-
+    // Atualiza
+    this.refresh();
     if (this.props.navigation.state.params) {
       if (this.props.navigation.state.params.donator) {
         const myItems = this.props.navigation.state.params.donator.materials;
@@ -35,17 +29,37 @@ export default class ListItems extends Component {
     }
   }
 
+  refresh() {
+    this.businessFacade.getListAllMaterials(
+      (isSuccess, res) => {
+        this.setState({ ...this.state, items: res, refresh: false });
+      }
+    );
+  }
+
   render() {
+    if (this.state.refresh) {
+      return <ActivityIndicator style={{ marginTop: 50 }} />;
+    }
+
+    if (this.state.items.length == 0 && !this.state.refresh) {
+      return (
+        <Text style={{ marginTop: 50, alignSelf: 'center' }}>
+          Nenhum livro cadastrado :(
+        </Text>
+      );
+    }
+
     return (
       <View style={styles.container}>
         <FlatList
-          data={this.state.myItems.length !== 0 ? this.state.myItems : this.state.items}
+          data={this.state.myItems.length != 0 ? this.state.myItems : this.state.items}
           keyExtractor={(item, index) => index}
           renderItem={
             ({ item }) => <Item
               navigation={this.props.navigation}
               material={item}
-              editMaterial={this.state.myItems !== 0 ? true : false}
+              editMaterial={this.state.myItems != 0 ? true : false}
             />
           }
         />
