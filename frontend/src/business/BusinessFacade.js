@@ -110,23 +110,33 @@ export default class BusinessFacade {
     if (!currentUserLogged) {
       // Usuario ainda nao foi criado
       this.userLoginForm.getCurrentUser(user => {
+        console.log('[Facade - getCurrentUser] user do business');
+        console.log(user);
         if (user) {
           currentUserLogged = user;
           response(user);
+        } else {
+          response(false);
         }
       });
     } else {
       // Usuario ja foi criado
+      console.log('[Facade - getCurrentUser] usuario ja salvo e recuperado');
       response(currentUserLogged);
     }
   }
 
   /* UserEditForm Methods */
 
+  signOut() {
+    this.userEditForm.deleteCurrentUser();
+    currentUserLogged = null;
+  }
+
   deleteCurrentUser(promisse) {
     this.getCurrentUser(user => {
       if (user) {
-        console.log(`Deletando ${user.mail}`);
+        console.log(`[Facade - deleteCurrentUser] Deletando ${user.mail}`);
         this.userEditForm.deleteUser(user,
           (isSuccess, res) => {
             currentUserLogged = null;
@@ -155,18 +165,18 @@ export default class BusinessFacade {
   // helper
   handlePromisseResponse(isSuccess, res, promisse) {
     if (isSuccess) {
-      console.log('Conectou ao DB!');
+      console.log('[Facade - handlePromisseResponse] Conectou ao DB!');
       const data = res.data;
       if (!data.error) {
-        console.log('Query Sucesso!');
+        console.log('[Facade - handlePromisseResponse] Query Sucesso!');
         promisse(true, data.data);
       } else {
-        console.log('Query Falhou!');
+        console.log('[Facade - handlePromisseResponse] Query Falhou!');
         console.log(res.data);
         promisse(false, res.data);
       }
     } else {
-      console.log('Nao Conectou ao DB!');
+      console.log('[Facade - handlePromisseResponse] Nao Conectou ao DB!');
       console.log(res);
       promisse(false, res);
     }

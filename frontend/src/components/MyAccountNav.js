@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
@@ -16,7 +16,7 @@ export default class MyAccountNav extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => this.props.onPress('')}>
+        <TouchableOpacity onPress={() => this.props._onPress('')}>
           <View style={styles.item}>
             <Text style={styles.txtStyle}>Meus Materias</Text>
             <Icon 
@@ -26,7 +26,7 @@ export default class MyAccountNav extends Component {
             />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => this.props.onPress('edit')} >
+        <TouchableOpacity onPress={() => this.props._onPress('edit')} >
           <View style={styles.item}>
             <Text style={styles.txtStyle}>Editar conta</Text>
             <Icon 

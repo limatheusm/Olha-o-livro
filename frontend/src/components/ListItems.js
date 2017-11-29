@@ -31,7 +31,6 @@ export default class ListItems extends Component {
 
   refresh() {
     this.setState({ ...this.state, refreshing: true });
-    console.log('refreshing..');
     this.businessFacade.getListAllMaterials(
       (isSuccess, res) => {
         if (isSuccess) {
