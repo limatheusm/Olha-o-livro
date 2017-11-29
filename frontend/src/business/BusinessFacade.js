@@ -1,5 +1,6 @@
 import MaterialFactory from './control/material/MaterialFactory';
 import MaterialRegisterForm from './control/material/MaterialRegisterForm';
+import ListMaterials from './control/material/ListMaterials';
 import UserEditForm from './control/user/UserEditForm';
 import UserRegisterForm from './control/user/UserRegisterForm';
 import UserLoginForm from './control/user/UserLoginForm';
@@ -14,7 +15,9 @@ export default class BusinessFacade {
     this.materialFactory = new MaterialFactory(); // Singleton
     this.userFactory = new UserFactory(); // Singleton
 
+    // Material
     this.materialRegisterForm = new MaterialRegisterForm();
+    this.listMaterials = new ListMaterials();
 
     // User
     this.userRegisterForm = new UserRegisterForm();
@@ -33,12 +36,9 @@ export default class BusinessFacade {
     return this.userFactory.getUser(type);
   }
 
-  // util.colors Methods
-  getMainColor() {
-    return mainColor;
-  }
-
   /***** Materials Methods *****/
+
+  // ListMaterials Methods
 
   // MaterialRegister Methods
   // registerMaterial() {
@@ -107,16 +107,13 @@ export default class BusinessFacade {
   /* UserGetDonator */
   getDataDonator(donator, response) {
     this.userGetDonator.getDonator(donator, 
-      (isSuccess, res) => {
-        const data = res.data;
-        if (isSuccess && !data.error) {
-          response(data.data);
-        } else {
-          response(false);
-        }
-      });
+      (isSuccess, res) => this.handleResponse(isSuccess, res, response));
   }
 
+  // util.colors Methods
+  getMainColor() {
+    return mainColor;
+  }
 
   // helper
   handleResponse(isSuccess, res, promisse) {
@@ -125,16 +122,16 @@ export default class BusinessFacade {
       const data = res.data;
       if (!data.error) {
         console.log('Query Sucesso!');
-        promisse(true);
+        promisse(true, data.data);
       } else {
         console.log('Query Falhou!');
-        console.log(res.data.message);
-        promisse(false);
+        console.log(res.data);
+        promisse(false, res.data);
       }
     } else {
       console.log('Nao Conectou ao DB!');
       console.log(res);
-      promisse(false);
+      promisse(false, res);
     }
   }
 }

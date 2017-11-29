@@ -57,7 +57,7 @@ export default class MaterialScreen extends Component {
     // this.businessFacade.getDataDonator({
     //   ...this.businessFacade.getUser('userDonator'),
     //   _id: '5a1df25a18314d186a2506a8'
-    // }, res => console.log(res));
+    // }, (isSuccess, res) => console.log(res));
   }
 
   render() {
