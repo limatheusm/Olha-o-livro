@@ -57,8 +57,12 @@ export default class MaterialDetails extends Component {
         let alreadyHelped = 0;
         let registeredMaterials = 0;
         registeredMaterials = res.length;
-        for (let index = 0; index < res.length; index++) {
-          const material = res[index];
+        const materialsAggregate = this.businessFacade.getMaterialsAggregate(res);
+        for (
+          materialsAggregate.createIterator(res); 
+          !materialsAggregate.iterator.isDone(); 
+          materialsAggregate.iterator.next()) {
+          const material = materialsAggregate.iterator.currentItem();
           if (!material.available) {
             alreadyHelped++;
           }

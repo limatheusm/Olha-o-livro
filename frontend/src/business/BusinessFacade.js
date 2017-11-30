@@ -8,6 +8,7 @@ import UserLoginForm from './control/user/UserLoginForm';
 import UserFactory from './control/user/UserFactory';
 import UserGetDonator from './control/user/UserGetDonator';
 import { mainColor } from './util/colors';
+import MaterialsAggregate from './control/material/MaterialsAggregate';
 
 let currentUserLogged = null;
 
@@ -104,6 +105,9 @@ export default class BusinessFacade {
       (isSuccess, res) => this.handlePromisseResponse(isSuccess, res, promisse));
   }
 
+  getMaterialsAggregate(list) {
+    return new MaterialsAggregate(list);
+  }
 
   /***** User Methods *****/
 
