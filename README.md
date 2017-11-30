@@ -248,6 +248,124 @@ class UserRemoveControl extends UserControlDecorator{
 
 ### Iterator
 ```js
+// Arquivo frontend/src/business/Iterator
+
+export default class Iterator {
+  constructor() {
+  }
+
+  first() {
+    throw new Error('Abstract method!');
+  }
+
+  next() {
+    throw new Error('Abstract method!');
+  }
+
+  isDone() {
+    throw new Error('Abstract method!');
+  }
+
+  currentItem() {
+    throw new Error('Abstract method!');
+  }
+}
+
+// Arquivo frontend/src/business/control/material/MaterialsIterator
+
+...
+export default class MaterialsIterator extends Iterator {
+  constructor(aggregate) {
+    super();
+    this.index = 0;
+    this.aggregate = aggregate;
+  }
+
+  first() {
+    return this.aggregate.list[0];
+  }
+
+  next() {
+    this.index += 1;
+    return this.aggregate.list[this.index];
+  }
+
+  isDone() {
+    return this.index === this.aggregate.list.length;
+  }
+
+  currentItem() {
+    if (this.isDone()) {
+      this.index = this.aggregate.list.length - 1;
+    } else if (this.index < 0) {
+      this.index = 0;
+    }
+    return this.aggregate.list[this.index];
+  }
+}
+
+// Arquivo frontend/src/business/Aggregate
+
+export default class Aggregate {
+  constructor() {
+  }
+
+  createIterator() {
+    throw new Error('Abstract method!');
+  }
+}
+
+// Arquivo frontend/src/business/control/material/MaterialsAggretate
+
+...
+export default class MaterialsAggregate extends Aggregate {
+  constructor(list) {
+    super();
+    this.list = list;
+  }
+
+  createIterator() {
+    this.iterator = new MaterialsIterator(this);
+  }
+}
+
+// Arquivo frontend/src/business/BusinessFacade
+...
+getMaterialsAggregate(list) {
+    return new MaterialsAggregate(list);
+  }
+
+...
+
+// Arquivo frontend/src/components/MaterialDetails
+
+...
+  buildDonator() {
+    const donatorID = this.state.material.donator;
+    const nav = this.props.navigation;
+    this.businessFacade.getAllMyMaterials(donatorID, (isSuccess, res) => {
+      if (isSuccess) {
+        let alreadyHelped = 0;
+        let registeredMaterials = 0;
+        registeredMaterials = res.length;
+        const materialsAggregate = this.businessFacade.getMaterialsAggregate(res);
+        for (
+          materialsAggregate.createIterator(res); 
+          !materialsAggregate.iterator.isDone(); 
+          materialsAggregate.iterator.next()) {
+          const material = materialsAggregate.iterator.currentItem();
+          if (!material.available) {
+            alreadyHelped++;
+          }
+        }
+        const donator = this.state.donator;
+        donator.alreadyHelped = alreadyHelped;
+        donator.registeredMaterials = registeredMaterials;
+        nav.navigate('DonatorDetails', { donator });
+      }
+    });
+  }
+...
 
 ```
 
