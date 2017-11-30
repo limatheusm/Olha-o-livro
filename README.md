@@ -271,6 +271,9 @@ export default class Iterator {
   }
 }
 
+```
+
+```js
 // Arquivo frontend/src/business/control/material/MaterialsIterator
 
 ...
@@ -304,6 +307,9 @@ export default class MaterialsIterator extends Iterator {
   }
 }
 
+```
+
+```js
 // Arquivo frontend/src/business/Aggregate
 
 export default class Aggregate {
@@ -315,6 +321,9 @@ export default class Aggregate {
   }
 }
 
+```
+
+```js
 // Arquivo frontend/src/business/control/material/MaterialsAggretate
 
 ...
@@ -329,6 +338,9 @@ export default class MaterialsAggregate extends Aggregate {
   }
 }
 
+```
+
+```js
 // Arquivo frontend/src/business/BusinessFacade
 ...
 getMaterialsAggregate(list) {
@@ -337,6 +349,9 @@ getMaterialsAggregate(list) {
 
 ...
 
+```
+
+```js
 // Arquivo frontend/src/components/MaterialDetails
 
 ...
