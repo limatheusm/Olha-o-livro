@@ -18,6 +18,7 @@ Para visualizar os Padrões de Projetos Implementados, vá para [Padrões](#padr
 
 * [Facade](#facade)
 * [Proxy](#proxy)
+* [Decorator](#decorator)
 
 ### Comportamental
 
@@ -74,10 +75,176 @@ export default class UserFactory extends UserAbstractFactory {
 
 ```
 
-### Proxy
 ```js
+// Arquivo backend/src/infra/api/DAO/UserDAO
+
+...
+
+
+let _instance = null;
+
+class UserDAO{
+
+    constructor () {
+        if (!_instance) _instance = this;
+
+        return _instance;
+    }
+    ...
+}
 
 ```
+
+```js
+// Arquivo backend/src/infra/api/DAO/MaterialDAO
+
+...
+
+
+let _instance = null;
+
+class MaterialDAO{
+
+    constructor () {
+        if (!_instance) _instance = this;
+
+        return _instance;
+    }
+    ...
+}
+
+```
+
+
+### Proxy
+```js
+// Arquivo backend/src/infra/api/DAO/UserDAOProxy
+
+const UserDAO = require('./UserDAO');
+
+class UserDAOProxy{
+    constructor(){
+        this.dao = new UserDAO();
+    }
+
+    insert (req, res){
+        if (this._defaultValidation(req.headers)){
+            this.dao.insert(req.body, res);
+
+        }else{
+            res.send({'error' : true, 'message' : 'Sem permissão!'});
+        }
+    }
+    ...
+
+    _defaultValidation (headers) {
+        return (headers.token && (headers.token === "oolivro" || headers.token === "oolivroadm"));
+    }
+}
+```
+
+```js
+// Arquivo backend/src/infra/api/DAO/MaterialDAOProxy
+
+const MaterialDAO = require('./MaterialDAO');
+
+class MaterialDAOProxy{
+    constructor(){
+        this.dao = new MaterialDAO();
+    }
+
+    insert (req, res){
+        if (this._defaultValidation(req.headers)){
+            this.dao.insert(req.body, res);
+
+        }else{
+            res.send({'error' : true, 'message' : 'Sem permissão!'});
+        }
+    }
+    ...
+
+    _defaultValidation (headers) {
+        return (headers.token && (headers.token === "oolivro" || headers.token === "oolivroadm"));
+    }
+}
+```
+
+### Decorator
+```js
+// Arquivo backend/src/business/control/Control
+
+class Control{
+    constructor () {}
+
+    execute () {}
+}
+
+
+// Arquivo backend/src/business/control/user/UserControl
+
+const Control = require('../Control');
+
+class UserControl extends Control{
+    constructor (userDao ,daoOperation) {
+        super();
+        this.userDao = userDao;
+        this.daoOperation = daoOperation;
+    }
+
+    execute(req, res){
+        this.userDao[this.daoOperation](req, res)
+    }
+
+    getDaoOperation () {
+        return this.daoOperation;
+    }
+
+    getUserDao() {
+        return this.userDao;
+    }
+}
+
+// Arquivo backend/src/business/control/user/UserControlDecorator
+
+const UserControl = require('./UserControl');
+
+class UserControlDecorator extends UserControl{
+    constructor (userControl){
+        super(userControl.getUserDao(), userControl.getDaoOperation());
+        this.control = userControl;
+    }
+
+    execute (req, res) {
+        this.control.execute(req, res);
+    }
+}
+
+// Arquivo backend/src/business/control/user/UserRemoveControl
+
+const UserControlDecorator = require('./UserControlDecorator');
+
+class UserRemoveControl extends UserControlDecorator{
+    constructor (userControl, voidValidator) {
+        super(userControl);
+        this.voidValidator = voidValidator
+    }
+
+    execute (req, res) {
+        let message = '';
+
+        message = this.voidValidator.valid(req.query)
+        
+        if (message !== ''){
+            res.send({'error' : true, 'message' : message});
+
+        } else {
+            super.execute(req, res);
+        }
+    }
+}
+
+```
+
 
 ### Iterator
 ```js
@@ -201,6 +368,62 @@ export default class UserFactory extends UserAbstractFactory {
 
 ```
 
+```js
+// Arquivo backend/src/business/control/user/UserControlFactory
+
+...
+
+class UserControlFactory{
+
+    constructor () {
+        this.controls = {}
+        this.controls.register = new UserRegisterControl(new UserControl(new UserDaoProxy(), 'insert'),
+                                                         new UserCompleteValidator());
+        this.controls.edit = new UserEditControl (new UserControl(new UserDaoProxy(), 'update'),
+                                                  new UserCompleteValidator());
+        this.controls.donator = new DonatorDetailControl(new UserControl(new UserDaoProxy(), 'find'),
+                                                     new VoidValidator());
+        this.controls.login = new LoginControl(new UserControl(new UserDaoProxy(), 'login'),
+                                               new LoginValidator());
+        this.controls.remove = new UserRemoveControl(new UserControl(new UserDaoProxy(), 'remove'),
+                                                     new VoidValidator());
+        this.controls.report = new UserReportControl(new UserControl(new UserDaoProxy(), 'report'));
+    }
+
+    getControl (controlType) {
+        return this.controls[controlType];
+    }
+}
+
+```
+
+```js
+// Arquivo backend/src/business/control/material/MaterialControlFactory
+
+...
+
+class MaterialControlFactory{
+    constructor () {
+        this.controls = {};
+        this.controls.list = ListMaterialControl;
+        this.controls.delete = MaterialDeleteControl;
+        this.controls.rate = MaterialRateControl;
+        this.controls.search = SearchMaterialControl;
+        this.controls.detail = MaterialDetailControl;
+        this.controls.edit = MaterialEditControl;
+        this.controls.register = MaterialRegisterControl;
+        this.controls.all = MaterialListAllControl;
+        this.controls.report = MaterialReportControl;
+    }
+
+    getControl (controlType) {
+        let control = this.controls[controlType];
+
+        return new control(new MaterialDaoProxy());
+    }
+}
+
+```
 
 
 

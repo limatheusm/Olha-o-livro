@@ -1,25 +1,26 @@
 /*
-    Classe para controlar a atualização de dados de um usuário
+    Classe para controle da remoção de usuários
 */
 const UserControlDecorator = require('./UserControlDecorator');
 
-class UserEditControl extends UserControlDecorator{
-    constructor (userControl, completeValidator) {
+class UserRemoveControl extends UserControlDecorator{
+    constructor (userControl, voidValidator) {
         super(userControl);
-        this.completeValidator = completeValidator;
+        this.voidValidator = voidValidator
     }
 
     execute (req, res) {
         let message = '';
 
-        message = this.completeValidator.valid(req.body);
-
+        message = this.voidValidator.valid(req.query)
+        
         if (message !== ''){
             res.send({'error' : true, 'message' : message});
+
         } else {
             super.execute(req, res);
         }
     }
 }
 
-module.exports = UserEditControl;
+module.exports = UserRemoveControl;
