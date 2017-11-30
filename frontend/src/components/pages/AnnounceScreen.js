@@ -2,15 +2,19 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
+  ScrollView,
+  RefreshControl,
+  Alert
 } from 'react-native';
 
 import { Picker, Item, Button, Label, Input, Container, Content, Form } from 'native-base';
 
 import BusinessFacade from '../../business/BusinessFacade';
 
-export default class AnnounceScreen extends Component {  
+export default class AnnounceScreen extends Component {
   static navigationOptions = {
-    title: 'Anunciar'
+    title: 'Anunciar',
+    headerLeft: null
   }
 
   constructor(props) {
@@ -20,12 +24,20 @@ export default class AnnounceScreen extends Component {
       material: {},
       title: '',
       description: '',
-      imgURL: '',
+      imageURL: 'https://s3.novatec.com.br/capas-ampliadas/capa-ampliada-9788575224083.jpg',
       local: '',
       type: '',
       sharingType: '',
-      category: ''
-    }
+      category: '',
+      currentUser: null,
+      refreshing: true
+    };
+  }
+
+  componentDidMount() {
+    this.setState({ ...this.state, refreshing: true }, () => {
+      this.verifyCurrentUser();
+    });
   }
 
   onValuePickerTypeChange(type) {
@@ -41,20 +53,88 @@ export default class AnnounceScreen extends Component {
   }
 
   announceMaterial() {
+    if (this.state.currentUser) {
+      const material = this.mountMaterial();
+      material.donator = this.state.currentUser._id;
+      this.businessFacade.registerMaterial(material, (isSuccess, res) => {
+        if (isSuccess) {
+          this.setState({ ...this.state, material });
+          Alert.alert('Seu Material foi cadastrado com sucesso!');
+          this.props.navigation.navigate('Material');
+        } else {
+          Alert.alert(`Erro! ${res.message}`);
+        }
+      });
+      // this.businessFacade.updateUser(this.state.currentUser, (isSucc, resp) => {
+      //   if (isSucc) {
+      //     this.setState({ ...this.state, material });
+      //     Alert.alert('Seu Material foi cadastrado com sucesso!');
+      //     this.props.navigation.navigate('Material');
+      //   } else {
+      //     Alert.alert(`Erro! ${resp.message}`);
+      //   }
+      // });
+    } else {
+      this.props.navigation.navigate('Announce');
+    }
+  }
+  // Verifica se o usuario esta logado no sistema, para liberar a postagem
+  verifyCurrentUser() {
+    this.businessFacade.getCurrentUser(currentUser => {
+      if (currentUser) {
+        this.setState({
+          ...this.state,
+          currentUser,
+          refreshing: false
+        });
+      } else {
+        this.setState({
+          ...this.state,
+          currentUser: null,
+          refreshing: false
+        });
+      }
+    });
+  }
+
+  mountMaterial() {
     const material = this.businessFacade.getMaterial('material');
     material.title = this.state.title;
-    material.type = this.state.sharingType;
+    material.sharingType = this.state.sharingType;
     material.description = this.state.description;
-    material.imageURL = this.state.imgURL;
+    material.imageURL = this.state.imageURL;
     material.local = this.state.local;
     material.date = '10/10/2017';
-    material.UserDonator = this.businessFacade.getUser('userDonator');
-    material.heart = 54;
+    material.category = [this.state.category];
+    material.type = this.state.type;
+    return material;
+  }
 
-    this.setState({ ...this.state, material })
+  handleRefresh = () => {
+    this.setState({ ...this.state, refreshing: true }, () => {
+      this.verifyCurrentUser();
+    });
   }
 
   render() {
+    if (!this.state.currentUser) {
+      // return <Text style={{ marginTop: 25, alignSelf: 'center' }}> Entre no sistema para anunciar! </Text>;
+      return (
+        <ScrollView
+          style={styles.container}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this.handleRefresh}
+            />
+          }
+        >
+        <Text style={{ marginTop: 50, alignSelf: 'center' }}>
+          Entre no sistema para anunciar!
+        </Text>
+        </ScrollView>
+      );
+    }
     return (
       <Container>
         <Content>
@@ -62,8 +142,8 @@ export default class AnnounceScreen extends Component {
             <Item stackedLabel>
               <Label>URL da Imagem</Label>
               <Input
-                onChangeText={imgURL => this.setState({ ...this.state, imgURL })}
-                value={this.state.imgURL}
+                onChangeText={imageURL => this.setState({ ...this.state, imageURL })}
+                value={this.state.imageURL}
               />
             </Item>
             <Item stackedLabel>
@@ -78,7 +158,7 @@ export default class AnnounceScreen extends Component {
               <Input
                 onChangeText={description => this.setState({ ...this.state, description })}
                 value={this.state.description}
-                multiline={true}
+                multiline
                 style={{ paddingBottom: 15, paddingTop: 15 }}
               />
             </Item>
@@ -101,8 +181,8 @@ export default class AnnounceScreen extends Component {
                 onValueChange={this.onValuePickerTypeChange.bind(this)}
               >
                 <Item label="Livro" value="book" />
-                <Item label="PDF" value="pdf" />
-                <Item label="Apostila física" value="apostille" />
+                <Item label="PDF" value="PDF" />
+                <Item label="Apostila física" value="Apostila física" />
               </Picker>
             </Item>
             <Item>
@@ -116,8 +196,8 @@ export default class AnnounceScreen extends Component {
                 selectedValue={this.state.sharingType}
                 onValueChange={this.onValuePickerSharingTypeChange.bind(this)}
               >
-                <Item label="Doação" value="donation" />
-                <Item label="Empréstimo" value="loan" />
+                <Item label="Doação" value="Doação" />
+                <Item label="Empréstimo" value="Empréstimo" />
               </Picker>
             </Item>
             <Item>
@@ -131,9 +211,9 @@ export default class AnnounceScreen extends Component {
                 selectedValue={this.state.category}
                 onValueChange={this.onValuePickerCategoryChange.bind(this)}
               >
-                <Item label="Programação" value="code" />
-                <Item label="Matemática" value="math" />
-                <Item label="Línguas" value="lang" />
+                <Item label="Programação" value="Programação" />
+                <Item label="Matemática" value="Matemática" />
+                <Item label="Línguas" value="Línguas" />
               </Picker>
             </Item>
             <Button
@@ -147,7 +227,7 @@ export default class AnnounceScreen extends Component {
           </Form>
         </Content>
       </Container>
-    )
+    );
   }
 }
 

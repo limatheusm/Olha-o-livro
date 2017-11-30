@@ -26,7 +26,7 @@ export default class Item extends Component {
   }
 
   render() {
-    const { item, imageView, image, itemDetails, title, sharingType, localView, local } = styles
+    const { item, image, itemDetails, title, sharingType, localView, local } = styles
     return (
       <TouchableWithoutFeedback onPress={this.onPress}>
         <View style={item}>

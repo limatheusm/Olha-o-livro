@@ -9,7 +9,7 @@ import ListItems from '../ListItems'
 
 export default class MyItemsScreen extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   static navigationOptions = {

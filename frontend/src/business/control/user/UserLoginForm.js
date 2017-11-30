@@ -31,18 +31,27 @@ export default class UserLoginForm {
 
   async getCurrentUser(promisse) {
     try {
-      console.log('Recuperando usuario logado...');
       const response = await AsyncStorage.getItem(CURRENT_USER_KEY);
       if (response !== null) {
         // We have data!!
-        console.log('Usuario logado recuperado!');
         const currentUser = await JSON.parse(response) || [];
-        promisse(currentUser);
+        if (!this.objIsEmpty(currentUser)) {
+          promisse(currentUser);
+        } else {
+          promisse(null);
+        }
+      } else {
+        promisse(null);
       }
     } catch (error) {
       // Error fetching data
+      promisse(null);
       throw new Error('Error fetching data');
     }
     return undefined;
+  }
+
+  objIsEmpty(obj) {
+    return Object.keys(obj).length === 0 && obj.constructor === Object;
   }
 }

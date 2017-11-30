@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-} from 'react-native';
-import { Picker, Item, Button, Label, Input, Container, Content, Form } from 'native-base';
+import { StyleSheet, Alert, Text } from 'react-native';
+import { 
+  Picker, Item, 
+  Button, Label, 
+  Input, Container, 
+  Content, Form, 
+  CheckBox, Body,
+  ListItem,
+} from 'native-base';
+
+import BusinessFacade from '../../business/BusinessFacade';
 
 export default class EditMaterialScreen extends Component {
   static navigationOptions = {
@@ -13,6 +19,7 @@ export default class EditMaterialScreen extends Component {
   constructor(props) {
     super(props);
     const material = this.props.navigation.state.params.material;
+    this.businessFacade = new BusinessFacade();
     this.state = {
       material,
       title: material.title,
@@ -21,7 +28,8 @@ export default class EditMaterialScreen extends Component {
       local: material.local,
       type: material.type,
       sharingType: material.sharingType,
-      category: material.category
+      category: material.category,
+      available: material.available
     };
   }
 
@@ -40,16 +48,42 @@ export default class EditMaterialScreen extends Component {
   editMaterial() {
     const material = this.state.material;
     material.title = this.state.title;
-    material.type = this.state.sharingType;
+    material.type = this.state.type;
+    material.sharingType = this.state.sharingType;
     material.description = this.state.description;
     material.imageURL = this.state.imageURL;
     material.local = this.state.local;
     material.date = '10/10/2017';
-    material.UserDonator = this.state.material.donator;
+    material.donator = this.state.material.donator._id;
     material.heart = this.state.material.donator;
+    material.category = this.state.category;
+    material.available = this.state.available;
+    this.businessFacade.editMaterial(material, (isSuccess, res) => {
+      if (isSuccess) {
+        Alert.alert('Sucesso ao atualizar o material!');
+        this.setState({ ...this.state, material });
+        this.props.navigation.navigate('MyAccount');
+      } else {
+        Alert.alert(`Erro! ${res.message}`);
+      }
+    });
+  }
 
-    this.setState({ ...this.state, material });
-    // Atualiza no BD
+  deleteMaterial() {
+    this.businessFacade.deleteMaterial(this.state.material, (isSuccess, res) => {
+      if (isSuccess) {
+        Alert.alert('Sucesso ao deletar o material!');
+        this.setState({ ...this.state, material: null });
+        this.props.navigation.navigate('MyAccount');
+      } else {
+        Alert.alert(`Erro! ${res.message}`);
+      }
+    });
+  }
+
+  handleCheckBox = () => {
+    const available = this.state.available ? false : true;
+    this.setState({ available });
   }
 
   render() {
@@ -98,9 +132,9 @@ export default class EditMaterialScreen extends Component {
                 selectedValue={this.state.type}
                 onValueChange={this.onValuePickerTypeChange.bind(this)}
               >
-                <Item label="Livro" value="book" />
-                <Item label="PDF" value="pdf" />
-                <Item label="Apostila física" value="apostille" />
+                <Item label="Livro" value="Livro" />
+                <Item label="PDF" value="PDF" />
+                <Item label="Apostila física" value="Apostila física" />
               </Picker>
             </Item>
             <Item>
@@ -114,8 +148,8 @@ export default class EditMaterialScreen extends Component {
                 selectedValue={this.state.sharingType}
                 onValueChange={this.onValuePickerSharingTypeChange.bind(this)}
               >
-                <Item label="Doação" value="donation" />
-                <Item label="Empréstimo" value="loan" />
+                <Item label="Doação" value="Doação" />
+                <Item label="Empréstimo" value="Empréstimo" />
               </Picker>
             </Item>
             <Item>
@@ -129,18 +163,36 @@ export default class EditMaterialScreen extends Component {
                 selectedValue={this.state.category}
                 onValueChange={this.onValuePickerCategoryChange.bind(this)}
               >
-                <Item label="Programação" value="code" />
-                <Item label="Matemática" value="math" />
-                <Item label="Línguas" value="lang" />
+                <Item label="Programação" value="Programação" />
+                <Item label="Matemática" value="Matemática" />
+                <Item label="Línguas" value="Línguas" />
               </Picker>
             </Item>
+            <ListItem style={{ backgroundColor: 'transparent' }}>
+              <CheckBox 
+                checked={this.state.available} 
+                color='green' 
+                onPress={this.handleCheckBox} 
+              />
+              <Body>
+                <Label style={{ marginLeft: 10 }}>Disponível</Label>
+              </Body>
+            </ListItem>
             <Button
               info
               block
-              style={styles.button}
+              style={{ marginTop: 20, marginHorizontal: 20 }}
               onPress={() => this.editMaterial()}
             >
               <Text style={styles.textButton}> Atualizar </Text>
+            </Button>
+            <Button
+              danger
+              block
+              style={styles.endButton}
+              onPress={() => this.deleteMaterial()}
+            >
+              <Text style={styles.textButton}> Deletar </Text>
             </Button>
           </Form>
         </Content>
@@ -153,7 +205,7 @@ const styles = StyleSheet.create({
   picker: {
 
   },
-  button: {
+  endButton: {
     margin: 20
   },
   textButton: {

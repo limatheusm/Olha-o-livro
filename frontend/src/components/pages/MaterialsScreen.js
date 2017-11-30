@@ -6,7 +6,8 @@ import BusinessFacade from '../../business/BusinessFacade';
 
 export default class MaterialScreen extends Component {
   static navigationOptions = {
-    title: 'Materiais'
+    title: 'Materiais',
+    headerLeft: null
   }
 
   constructor(props) {
@@ -22,8 +23,12 @@ export default class MaterialScreen extends Component {
     //     console.log('Erro ao registrar');
     //   }
     // });
-
-    // this.businessFacade.loginUser(this.businessFacade.getUser('user'), res => {
+    // const user = {
+    //   ...this.businessFacade.getUser('userDonator'),
+    //   mail: 'user@olhaolivro.com',
+    //   password: 'Lima1234567'
+    // };
+    // this.businessFacade.loginUser(user, res => {
     //   if (res) {
     //     console.log('Login efetuado com sucesso!');
     //   } else {
@@ -60,16 +65,16 @@ export default class MaterialScreen extends Component {
     // }, (isSuccess, res) => console.log(res));
 
     /* Materials Methods */
-    
+
     // this.businessFacade.getListAllMaterials((isSuccess, res) => console.log(res));
-    
+
     // this.businessFacade.registerMaterial(
     //   this.businessFacade.getMaterial('material'),
     //   (isSuccess, res) => console.log(isSuccess)
     // );
 
     // this.businessFacade.deleteMaterial(
-    //   { ...this.businessFacade.getMaterial('material'), _id: '5a1ec2848d1e59237284f771' },
+    //   { ...this.businessFacade.getMaterial('material'), _id: '5a1f6a3c38af813912dee997' },
     //   (isSuccess, res) => console.log(isSuccess)
     // );
 
@@ -79,7 +84,7 @@ export default class MaterialScreen extends Component {
     // );
 
     // this.businessFacade.getMaterialCategory('Programação', (isSuccess, res) => console.log(res));
-    
+
     // this.businessFacade.getMaterialTitle('Livro de Python', (isSuccess, res) => console.log(res));
 
     // this.businessFacade.editMaterial(

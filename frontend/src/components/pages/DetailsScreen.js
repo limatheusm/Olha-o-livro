@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
-  View,
-  Alert
+  View
 } from 'react-native';
 
 import ImageHeader from '../ImageHeader';
@@ -15,16 +14,6 @@ export default class DetailsScreen extends Component {
   constructor(props) {
     super(props);
     this.state = { material: this.props.navigation.state.params.material };
-    this.toDonatorDetailsScreen = this.toDonatorDetailsScreen.bind(this);
-    this.heartAction = this.heartAction.bind(this);
-  }
-
-  toDonatorDetailsScreen() {
-    this.props.navigation.navigate('DonatorDetails', { donator: this.state.material.donator })
-  }
-
-  heartAction() {
-    Alert.alert(`Voce deu like no material ${this.state.material.title}!`);
   }
 
   render() {

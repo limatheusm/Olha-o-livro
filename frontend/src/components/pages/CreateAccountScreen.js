@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   View,
   Button,
+  Alert,
   StyleSheet
 } from 'react-native';
 import { Container, Content, Form, Item, Icon, Input } from 'native-base';
@@ -14,38 +15,33 @@ export default class CreateAccountScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      mail: '',
-      password: '',
-      phone: '',
-      from: '',
-      imageURL: ''
+      name: 'Matheus',
+      mail: 'user@olhaolivro.com',
+      password: 'Lima1234567',
+      phone: '(83) 9 9999-9999',
+      from: 'UFPB',
+      imageURL: 'https://scontent.frec3-2.fna.fbcdn.net/v/t1.0-9/20292831_1563732526991471_5299144803312892119_n.jpg?oh=82be979c7aebcc7dac4a9d6599e4e7a5&oe=5AA57AA0'
     };
+    this.registerAccount = this.registerAccount.bind(this);
+    this.businessFacade = new BusinessFacade();
   }
 
-  handleChange(type, obj) {
-    switch (type) {
-      case 'name':
-        this.setState({ ...this.state, name: obj });
-        break;
-      case 'mail':
-        this.setState({ ...this.state, mail: obj });
-        break;
-      case 'password':
-        this.setState({ ...this.state, password: obj });
-        break;
-      case 'phone':
-        this.setState({ ...this.state, phone: obj });
-        break;
-      case 'from':
-        this.setState({ ...this.state, from: obj });
-        break;
-      case 'imageURL':
-        this.setState({ ...this.state, imageURL: obj });
-        break;
-      default:
-        throw new Error('Type Error handleChange');
-    }
+  registerAccount() {
+    const user = this.businessFacade.getUser('userDonator');
+    user.from = this.state.from;
+    user.imageURL = this.state.imageURL;
+    user.mail = this.state.mail;
+    user.name = this.state.name;
+    user.password = this.state.password;
+    user.phone = this.state.phone;
+    this.businessFacade.registerUser(user, (isSuccess, res) => {
+      if (isSuccess) {
+        Alert.alert('Conta criada com sucesso!');
+        this.props.navigation.state.params.navigation.navigate('MyAccount');
+      } else {
+        Alert.alert(`Error! ${res.message}`);
+      }
+    });
   }
 
   render() {
@@ -59,7 +55,7 @@ export default class CreateAccountScreen extends Component {
                 style={styles.text}
                 placeholder='Digite seu nome'
                 placeholderTextColor='white'
-                onChangeText={text => this.handleChange('name', text)}
+                onChangeText={name => this.setState({ ...this.state, name })}
                 value={this.state.name}
               />
             </Item>
@@ -69,7 +65,7 @@ export default class CreateAccountScreen extends Component {
                 style={styles.text}
                 placeholder='Digite seu email'
                 placeholderTextColor='white'
-                onChangeText={text => this.handleChange('mail', text)}
+                onChangeText={mail => this.setState({ ...this.state, mail })}
                 value={this.state.mail}
               />
             </Item>
@@ -80,7 +76,7 @@ export default class CreateAccountScreen extends Component {
                 placeholder='Digite sua senha'
                 placeholderTextColor='white'
                 secureTextEntry
-                onChangeText={text => this.handleChange('password', text)}
+                onChangeText={password => this.setState({ ...this.state, password })}
                 value={this.state.password}
               />
             </Item>
@@ -90,7 +86,7 @@ export default class CreateAccountScreen extends Component {
                 style={styles.text}
                 placeholder='Digite seu número'
                 placeholderTextColor='white'
-                onChangeText={text => this.handleChange('phone', text)}
+                onChangeText={phone => this.setState({ ...this.state, phone })}
                 value={this.state.phone}
               />
             </Item>
@@ -100,7 +96,7 @@ export default class CreateAccountScreen extends Component {
                 style={styles.text}
                 placeholder='Digite sua Universidade/Escola'
                 placeholderTextColor='white'
-                onChangeText={text => this.handleChange('from', text)}
+                onChangeText={from => this.setState({ ...this.state, from })}
                 value={this.state.from}
               />
             </Item>
@@ -110,12 +106,12 @@ export default class CreateAccountScreen extends Component {
                 style={styles.text}
                 placeholder='Digite a url de sua foto'
                 placeholderTextColor='white'
-                onChangeText={text => this.handleChange('imageURL', text)}
+                onChangeText={imageURL => this.setState({ ...this.state, imageURL })}
                 value={this.state.imageURL}
               />
             </Item>
             <View style={styles.buttonView}>
-              <Button color='white' title="Criar" onPress={() => false} />
+              <Button color='white' title="Criar" onPress={() => this.registerAccount()} />
               <Button color='white' title="Criar com Google" onPress={() => false} />
               <Button color='white' title="Criar com Facebook" onPress={() => false} />
             </View>

@@ -32,12 +32,10 @@ export default class UserEditForm {
 
   async deleteCurrentUser() {
     try {
-      const keys = [CURRENT_USER_KEY];
-      await AsyncStorage.multiRemove(keys, (err) => {
-        console.log(err);
-      });
+      await AsyncStorage.setItem(CURRENT_USER_KEY, JSON.stringify({}));
     } catch (error) {
-      throw new Error('Error delete data');
+      // Error saving data
+      throw new Error('Error saving data');
     }
   }
 }

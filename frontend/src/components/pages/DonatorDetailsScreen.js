@@ -35,7 +35,7 @@ export default class DonatorDetailsScreen extends Component {
             name="handshake-o"
             size={25}
             color={this.businessFacade.getMainColor()}
-            text="Já ajudou 5 pessoas"
+            text={`Já ajudou ${this.state.donator.alreadyHelped} pessoa(s)`}
             fontSize={20}
           />
           <IconText
@@ -43,7 +43,7 @@ export default class DonatorDetailsScreen extends Component {
             name="open-book"
             size={25}
             color={this.businessFacade.getMainColor()}
-            text="10 Materiais cadastrados"
+            text={`${this.state.donator.registeredMaterials} Materiais cadastrado(s)`}
             fontSize={20}
           />
           <IconText
