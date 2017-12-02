@@ -1,5 +1,6 @@
 # Olha o Livro!
 __Backend__: API Restful feita em **NodeJS** + **Express** + **MongoDB**
+
 __Frontend__: Aplicação Mobile Nativa para Android e iOS feito em **React Native**.
 
 Para testar a aplicação, vá para [Execução](#execução).
@@ -27,6 +28,14 @@ Para visualizar os Padrões de Projetos Implementados, vá para [Padrões](#padr
 ## Implemetações
 
 ### Singleton
+
+O padrão **Singleton** por se tratar de um padrão criacional, possibilitou que seu uso fosse feito em várias partes. Tais utilizações foram feitas isoladamente em alguns casos, como também em conjunto com outro padrão que foi o *Factory Method*.
+
+A principio utilizousse o *Singleton* para que houvesse uma única instância para cada um dos dois *Factorys Methods*, trazendo assim maior controle para a gerência das instâncias desse outro padrão.
+
+O *Singleton* também foi utilizado em conjunto com o banco de dados, com a mesma intenção, que é de facilitar a gerência das instâncias que acessam ao banco de dados.
+
+Segue abaixo trechos dos códigos respectivos a implementação do padrão e a utilização dele junto à outras entidades.
 ```js
 // Arquivo frontend/src/business/control/material/MaterialFactory
 
@@ -247,6 +256,14 @@ class UserRemoveControl extends UserControlDecorator{
 
 
 ### Iterator
+
+O padrão **Iterator** foi utilizado para que fossemos capazes de acessar um conjunto de objetos do tipo *Material* de forma sequêncial, sem que houvesse a necessidade de conhecer intimamente a estrutura desse objeto.  
+
+A implementação do padrão também permitiu a possibilidade do acesso à outros conjuntos de objetos caso sejam necessários futuramente, de forma mais simplificada e proporcionando que haja um menor acoplamento entre os conjuntos de objetos a serem iterados, e as entidades que utilizam os conjuntos.
+
+Outro ponto que vale ressalva além dos citados anteriormente, é que caso haja a necessidade de alteração na forma de acesso dos itens do conjunto, essa alteração tornou-se simplificada e disponível para reutilização por outros conjuntos de objetos do mesmo tipo, ou tipos diferentes.
+
+Segue abaixo trechos dos códigos respectivos a implementação do padrão e a utilização dele junto à outras entidades.
 ```js
 // Arquivo frontend/src/business/Iterator
 
@@ -385,6 +402,10 @@ getMaterialsAggregate(list) {
 ```
 
 ### Facade
+
+O padrão **Facade** foi utilizado para centralizar e facilitar a utilização de vários subsistemas dentro do nosso sistema. A sua implementação possibilitou o desacoplamento entre a parte de *View* do sistema e os subsistemas da parte do *Business*, fazendo com que a View mantivesse comunicação apenas com a Facade, e essa por consequência se comunicaria com as partes desejadas do sistema.
+
+Segue abaixo trechos do código respectivo a implementação do padrão. 
 ```js
 // Arquivo frontend/src/business/BusinessFacade
 
@@ -600,6 +621,12 @@ export default class BusinessFacade {
 ```
 
 ### Abstract Factory
+
+O padrão **Abstract Factory** possibilitou que famlias de entidades que tem algum relacionamento, pudessem ser criadas de diferentes formas atraves de uma implementação concreta da interface que foi provida pelo padrão. Isso fez com que o sistema ganhasse em estabilidade, pois a implementação do padrão é uma implementação estavel, e facilita uma possível extensão para implementação de novas familias que a principio não existem na primeira versão da aplicação.
+
+Esse padrão também interage diretamente com outro padrão que é o *Factory Method* e que será exposto em seguida.
+
+Segue abaixo trechos do código respectivo a implementação do padrão.
 ```js
 // Arquivo frontend/src/business/control/material/MaterialAbstractFactory
 
@@ -641,6 +668,12 @@ export default class UserAbstractFactory {
 ```
 
 ### Factory Method
+
+O padrão **Factory Method** foi utilizado em conjunto com o *Abstract Factory* na parte do *Business Control* do sistema, para criação de familias de objetos que tem um mesmo dominio, mas dando oportunidade a subclasse decidir qual seria o objeto criado.
+
+(completa aqui vini)
+
+Segue abaixo trechos do código respectivo a implementação do padrão.
 ```js
 // Arquivo frontend/src/business/control/material/MaterialFactory
 
