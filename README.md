@@ -126,10 +126,17 @@ class MaterialDAO{
 
 
 ### Proxy
+
+O padrão **Proxy** foi utiliziado com o intuíto de limitar o acesso às operações com o banco de dados, o que impede o acesso para quem não possui a permissão necessária.
+
+O padrão foi implementado tanto para a manipulação dos dados do usuário quanto dos materiais.
+
+Segue abaixo trechos de códigos de onde o padrão foi utilizado.
+
 ```js
 // Arquivo backend/src/infra/api/DAO/UserDAOProxy
 
-const UserDAO = require('./UserDAO');
+...
 
 class UserDAOProxy{
     constructor(){
@@ -147,7 +154,7 @@ class UserDAOProxy{
     ...
 
     _defaultValidation (headers) {
-        return (headers.token && (headers.token === "oolivro" || headers.token === "oolivroadm"));
+        return (headers.token && (headers.token === "oolivro" ||                 headers.token === "oolivroadm"));
     }
 }
 ```
@@ -155,7 +162,7 @@ class UserDAOProxy{
 ```js
 // Arquivo backend/src/infra/api/DAO/MaterialDAOProxy
 
-const MaterialDAO = require('./MaterialDAO');
+...
 
 class MaterialDAOProxy{
     constructor(){
@@ -179,6 +186,11 @@ class MaterialDAOProxy{
 ```
 
 ### Decorator
+
+O padrão **Decorator** foi utilizada para possibilitar uma maior flexibilidade da interface de controle do usuário, quanto ao uso de validadores de dados. Com isso, é possível se aproveitar do polimorfísmo que a utilização da interface provê (apesar do Javascript não levar isso em consideração durante a execução, mas utiliza-se para fins estruturais dos projeto) e possibilitar a utilização de diferentes classes de validação de dados do usuário.
+
+Segue abaixo trechos de códigos das partes que compõem a implementação do padrão Decorator e a implementação de uma classe de controle de usuário concreta utilizando a classe do padrão.
+
 ```js
 // Arquivo backend/src/business/control/Control
 
@@ -191,7 +203,7 @@ class Control{
 
 // Arquivo backend/src/business/control/user/UserControl
 
-const Control = require('../Control');
+...
 
 class UserControl extends Control{
     constructor (userDao ,daoOperation) {
@@ -215,7 +227,7 @@ class UserControl extends Control{
 
 // Arquivo backend/src/business/control/user/UserControlDecorator
 
-const UserControl = require('./UserControl');
+...
 
 class UserControlDecorator extends UserControl{
     constructor (userControl){
@@ -230,7 +242,7 @@ class UserControlDecorator extends UserControl{
 
 // Arquivo backend/src/business/control/user/UserRemoveControl
 
-const UserControlDecorator = require('./UserControlDecorator');
+...
 
 class UserRemoveControl extends UserControlDecorator{
     constructor (userControl, voidValidator) {
