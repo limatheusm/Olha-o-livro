@@ -7,6 +7,20 @@ Para testar a aplicação, vá para [Execução](#execução).
 
 Para visualizar os Padrões de Projetos Implementados, vá para [Padrões](#padrões-de-projetos-implementados).
 
+## Documento de requisitos
+
+[Documento de requisitos do projeto](MPS_DocumentoDeRequisitos_Olha_O_Livro.pdf)
+
+## Screenshots
+Materiais             |  Minha Conta
+:-------------------------:|:-------------------------:
+![](/images/app2.jpg)  |  ![](/images/app1.jpg)
+
+## Diagrama de Classes
+
+![](/images/diagrama-de-classes.png)
+[Link para melhor visualização](https://drive.google.com/file/d/1hPq59W4qblZldZfL5nnQ3yYx2V-ix-E4/view?usp=sharing)
+
 ## Padrões de Projetos Implementados
 
 ### Criação
@@ -681,11 +695,12 @@ export default class UserAbstractFactory {
 
 ### Factory Method
 
-O padrão **Factory Method** foi utilizado em conjunto com o *Abstract Factory* na parte do *Business Control* do sistema, para criação de familias de objetos que tem um mesmo dominio, mas dando oportunidade a subclasse decidir qual seria o objeto criado.
+O padrão **Factory Method** foi utilizado em conjunto com o *Abstract Factory* na parte do *Business Control* do sistema, para criação de famílias de objetos que tem um mesmo domínio, mas dando oportunidade a subclasse decidir qual seria o objeto criado.
 
-(completa aqui vini)
+No servidor o **Factory Method** foi utilizado para a instanciação dos objetos das classes de controle de Usuário e de Materiais.
 
 Segue abaixo trechos do código respectivo a implementação do padrão.
+
 ```js
 // Arquivo frontend/src/business/control/material/MaterialFactory
 
@@ -813,6 +828,27 @@ class MaterialControlFactory{
 
 ```
 
+## Rotas API Olha o Livro!
+
+URL = localhost:3003/api
+
+Rota                       | Request | Passagem de dado                   |Descrição 
+-----------                | ------  | -----------                        |---------
+URL/user                   | POST    | Todos os dados no usuário pelo body|Cria usuário
+URL/user                   | PUT     | Todos os dados do usuário pelo body com o rótulo '_id' (String)          |Atualiza usuário
+URL/user/                  | DELETE  | Passagem do 'id' como parâmetro |Deleta usuário
+URL/user/login             | GET     | Passagem por parâmetro: E-mail com o rótulo 'mail' e a senha pelo rótulo 'password' |Efetua login
+URL/user/donator/:id       | GET     | Passagem do 'id' como parâmetro |Recupera dados do doador
+URL/user/get/report        | GET     | Não precisa de nenhum parâmetro |Retorna um json com informações sobre os usuários em geral cadastrados no sistema
+URL/material               | POST    | Todos os do material pelo body|Cria Material
+URL/material/:id           | GET     | Passagem do 'id' como parâmetro |Recupera material
+URL/material/              | PUT     | Todos os dados do material com o rótulo '_id' (String) | Atualiza material
+URL/material/              | DELETE  | Passagem do 'id' como parâmetro|Deleta material
+URL/material/list/:category| GET     | Passagem da categoria como parâmentro pelo rótulo 'category'|Recupera lista de materiais
+URL/material/search/:title | GET     | Passagem do titulo como parâmentro pelo rótulo 'title'|Busca Material
+URL/material/rate          | PUT     | Passagem do id pelo body com o rótulo '_id'|Atualiza nota do material
+URL/material/get/all       | GET     | Não precisa de nenhum parâmetro    | Pegar todos os materiais do banco
+URL/material/get/report    | GET     | Não precisa de nenhum parâmetro |Retorna um json com informações sobre os materiais em geral cadastrados no sistema
 
 
 ## Execução
